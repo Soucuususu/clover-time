@@ -3,342 +3,710 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#100d20">
-<title>Clover Time 🍀</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101014">
+<title>Clover Time</title>
 <style>
+:root {
+  --bg:#101014;
+  --panel:#1b1b21;
+  --panel2:#24242c;
+  --border:#35353f;
+  --text:#f2f2f5;
+  --muted:#a4a4b1;
+  --green:#70d99a;
+  --purple:#aa91f5;
+  --red:#ed818b;
+}
 *{box-sizing:border-box}
-body{margin:0;background:#0d0b18;color:#f7f2ff;font-family:system-ui,sans-serif}
-header{text-align:center;padding:25px 12px;background:linear-gradient(135deg,#25134c,#101b36,#32133f);border-bottom:1px solid #6947a2}
-header h1{font-size:36px;margin:4px;background:linear-gradient(90deg,#7cf5d2,#c6a0ff,#ff9cde);color:transparent;background-clip:text}
-header p{color:#c6b9e5;font-size:13px}
-main{max-width:950px;margin:auto;padding:14px}
-.card{background:#171427;border:1px solid #342b50;border-radius:17px;padding:16px;margin-bottom:13px}
-h2{font-size:18px;margin:0 0 12px}
-label{display:block;font-size:12px;color:#bdb1d8;margin:12px 0 5px}
-input,select{width:100%;padding:12px;border:1px solid #44365e;border-radius:10px;background:#0e0c19;color:white}
-button{background:#26203e;color:white;border:1px solid #493766;border-radius:11px;padding:11px;cursor:pointer;font-weight:650}
-button:active{transform:scale(.98)}
-button:hover{border-color:#bd91ff}
-.primary{background:linear-gradient(120deg,#7946df,#c14dbd);border:0}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;font-size:14px
+}
+header{
+  padding:20px 15px;text-align:center;
+  background:#17171d;border-bottom:1px solid var(--border)
+}
+header h1{margin:0;font-size:27px;letter-spacing:2px}
+header p{margin:7px 0 0;color:var(--muted);font-size:12px}
+main{max-width:850px;margin:auto;padding:14px}
+.card{
+  background:var(--panel);border:1px solid var(--border);
+  border-radius:12px;padding:15px;margin-bottom:12px
+}
+h2{font-size:16px;margin:0 0 12px}
+h3{font-size:14px;margin:0 0 9px}
+p{line-height:1.5}
+.muted{color:var(--muted);font-size:12px}
+label{display:block;color:var(--muted);margin:12px 0 6px;font-size:12px}
+input,select{
+  display:block;width:100%;padding:12px;background:#111116;
+  border:1px solid var(--border);border-radius:8px;color:white;
+  font-size:15px
+}
+button{
+  background:var(--panel2);color:var(--text);
+  border:1px solid var(--border);border-radius:8px;
+  padding:11px;cursor:pointer;font-size:13px
+}
+button:active{opacity:.75}
+button:disabled{opacity:.4;cursor:not-allowed}
+button.primary{background:var(--green);color:#102016;border-color:var(--green);font-weight:bold}
+button.selected{border-color:var(--green);background:#23392c}
 .wide{width:100%;margin-top:12px}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.choice.selected{border-color:#bd91ff;background:#382557}
 .hidden{display:none!important}
-.profile{display:flex;align-items:center;gap:13px}
-.avatar{width:65px;height:65px;display:grid;place-items:center;border-radius:18px;font-size:35px;background:linear-gradient(135deg,#6f49c5,#e05ab5)}
-.name{font-size:22px;font-weight:850}
-.muted{font-size:12px;color:#b2a8cb}
-.tags{margin-top:5px}
-.tag{display:inline-block;padding:4px 8px;margin:3px;border-radius:20px;background:#302447;font-size:11px}
+.layout{display:grid;grid-template-columns:1fr;gap:12px}
+.profile{display:flex;gap:13px;align-items:center}
+.avatar{
+  width:58px;height:58px;flex-shrink:0;border-radius:10px;
+  display:grid;place-items:center;background:#33313f;
+  color:var(--green);font-size:24px;font-weight:bold
+}
+.name{font-size:21px;font-weight:bold;margin-bottom:5px}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.pill{padding:7px 9px;background:#111116;border:1px solid var(--border);border-radius:7px;font-size:12px}
 .stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:15px}
-.stat{background:#100e1d;border:1px solid #2c2641;border-radius:10px;padding:10px}
-.statline{display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px;gap:5px}
-.bar{height:7px;background:#302a42;border-radius:9px;overflow:hidden}
-.fill{height:100%;background:linear-gradient(90deg,#9a60ff,#67e9e0);border-radius:9px}
-.money{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
-.pill{padding:8px;background:#100e1d;border:1px solid #332b48;border-radius:10px;font-size:12px}
-.actions button{text-align:left;min-height:62px}
-.actions small{display:block;font-weight:400;color:#b5a8ce;margin-top:4px}
-.events{display:flex;flex-direction:column;gap:8px;max-height:390px;overflow:auto}
-.event{background:#100e1d;padding:11px;border-radius:10px;border:1px solid #302740;font-size:13px;line-height:1.5}
-.event b{color:#d4b5ff}
-.event small{display:block;color:#9589b1;margin-bottom:4px}
-.spells{display:flex;gap:6px;flex-wrap:wrap}
-.spell{background:#100e1d;border:1px solid #57427a;border-radius:8px;padding:7px;font-size:12px}
-footer{text-align:center;padding:20px;color:#716987;font-size:11px}
-@media(min-width:720px){.layout{display:grid;grid-template-columns:1.1fr .9fr;gap:13px}.layout .card{margin-bottom:13px}}
+.stat{padding:10px;background:#141419;border-radius:8px}
+.stat-top{display:flex;justify-content:space-between;gap:5px;font-size:12px;margin-bottom:7px}
+.bar{height:6px;background:#373740;border-radius:5px;overflow:hidden}
+.fill{height:100%;background:var(--green);border-radius:5px}
+.fill.purple{background:var(--purple)}
+.fill.red{background:var(--red)}
+.actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.actions button{text-align:left;min-height:43px}
+.actions button small{display:block;color:var(--muted);font-size:11px;font-weight:normal;margin-top:4px}
+.event{
+  border-bottom:1px solid var(--border);padding:12px 0;
+  line-height:1.5;overflow-wrap:anywhere
+}
+.event:first-child{padding-top:0}
+.event:last-child{border-bottom:0}
+.event-year{font-size:10px;color:var(--green);font-weight:bold;letter-spacing:1px}
+.event-title{font-weight:bold;margin:4px 0}
+.event-text{color:#c5c5cf;font-size:13px}
+.spells{display:flex;flex-wrap:wrap;gap:6px}
+.spell{border:1px solid #51466e;padding:7px 9px;border-radius:6px;font-size:12px}
+footer{text-align:center;color:#70707c;padding:20px;font-size:11px}
+.notice{padding:10px;background:#222d25;border:1px solid #375340;border-radius:8px;color:#baf0ca;margin-bottom:12px;font-size:12px}
+@media(min-width:680px){
+  .layout{grid-template-columns:1fr 1fr}
+  .span2{grid-column:1/-1}
+}
 </style>
 </head>
 <body>
 <header>
-<div style="font-size:35px">🍀</div>
-<h1>CLOVER TIME</h1>
-<p>uma vida inteira pode mudar com um grimório</p>
+  <h1>CLOVER TIME</h1>
+  <p>Uma vida. Mil destinos.</p>
 </header>
+
 <main>
-<section id="start" class="card">
-<h2>✨ Comece sua história</h2>
-<p class="muted">Escolha seu nome, gênero e reino. O restante será aleatório!</p>
-<label>Nome do personagem</label>
-<input id="name" maxlength="22" placeholder="Ex.: Aster Vale">
-<label>Gênero</label>
-<div class="grid" id="genders">
-<button class="choice selected" data-v="Masculino">♂ Masculino</button>
-<button class="choice" data-v="Feminino">♀ Feminino</button>
-</div>
-<label>Reino de nascimento</label>
-<div class="grid" id="kingdoms">
-<button class="choice selected" data-v="Clover">🍀 Clover</button>
-<button class="choice" data-v="Spade">♠ Spade</button>
-<button class="choice" data-v="Heart">💧 Heart</button>
-<button class="choice" data-v="Diamond">💎 Diamond</button>
-</div>
-<button class="primary wide" id="begin">🌟 COMEÇAR MINHA VIDA</button>
-<button class="wide" id="load">📂 Carregar vida salva</button>
+<section id="creation" class="card">
+  <h2>Crie sua vida</h2>
+  <p class="muted">Escolha três características. Sua família, seus atributos e seu potencial serão gerados aleatoriamente.</p>
+
+  <label for="inputName">Nome</label>
+  <input id="inputName" maxlength="24" placeholder="Digite seu nome">
+
+  <label for="inputGender">Gênero</label>
+  <select id="inputGender">
+    <option>Masculino</option>
+    <option>Feminino</option>
+  </select>
+
+  <label for="inputKingdom">Reino de nascimento</label>
+  <select id="inputKingdom">
+    <option value="Clover">Reino de Clover</option>
+    <option value="Spade">Reino de Spade</option>
+    <option value="Heart">Reino de Heart</option>
+    <option value="Diamond">Reino de Diamond</option>
+  </select>
+
+  <button id="startButton" class="primary wide" type="button">Começar minha vida</button>
+  <button id="loadButton" class="wide" type="button">Carregar vida salva</button>
+  <p id="startMessage" class="muted"></p>
 </section>
 
 <section id="game" class="hidden">
-<div class="layout">
-<div>
-<div class="card">
-<div class="profile">
-<div class="avatar" id="avatar">🧙</div>
-<div><div class="name" id="pname"></div><div class="muted" id="identity"></div><div class="tags" id="tags"></div></div>
-</div>
-<div class="money">
-<div class="pill" id="age"></div>
-<div class="pill" id="money"></div>
-<div class="pill" id="order"></div>
-</div>
-<div class="stats" id="stats"></div>
-</div>
-<div class="card">
-<h2 id="booktitle">📕 Grimório</h2>
-<p class="muted" id="booktext">Seu grimório poderá despertar aos 15 anos.</p>
-<div class="spells" id="spells"></div>
-</div>
-<div class="card">
-<h2>🎯 Ações</h2>
-<div class="grid actions" id="actions"></div>
-<button class="primary wide" id="year">⏩ Avançar um ano</button>
-</div>
-<div class="card">
-<h2>💾 Progresso</h2>
-<div class="grid">
-<button id="save">Salvar vida</button>
-<button id="summary">Resumo</button>
-<button id="restart">Nova vida</button>
-<button id="export">Exportar resumo</button>
-</div>
-</div>
-</div>
-<div>
-<div class="card">
-<h2>📜 Crônica da sua vida</h2>
-<div class="events" id="events"></div>
-</div>
-<div class="card">
-<h2>🌠 Seu destino</h2>
-<p class="muted" id="destiny"></p>
-</div>
-</div>
-</div>
+  <div class="layout">
+    <div class="card">
+      <div class="profile">
+        <div class="avatar" id="avatar">CT</div>
+        <div>
+          <div class="name" id="playerName"></div>
+          <div class="muted" id="playerInfo"></div>
+          <div class="muted" id="familyInfo" style="margin-top:5px"></div>
+        </div>
+      </div>
+
+      <div class="pills">
+        <div class="pill" id="agePill"></div>
+        <div class="pill" id="moneyPill"></div>
+        <div class="pill" id="rankPill"></div>
+      </div>
+
+      <div class="stats" id="stats"></div>
+    </div>
+
+    <div class="card">
+      <h2>Seu grimório</h2>
+      <div id="bookTitle" style="font-weight:bold;margin-bottom:8px">Ainda não despertado</div>
+      <p id="bookDescription" class="muted"></p>
+      <h3>Feitiços conhecidos</h3>
+      <div class="spells" id="spells"></div>
+    </div>
+
+    <div class="card">
+      <h2>O que você quer fazer?</h2>
+      <div class="actions" id="actions"></div>
+      <button id="ageButton" class="primary wide" type="button">Envelhecer 1 ano</button>
+      <p class="muted">As ações acontecem na sua idade atual. Envelhecer avança a história.</p>
+    </div>
+
+    <div class="card">
+      <h2>Histórico de vida</h2>
+      <div id="events"></div>
+    </div>
+
+    <div class="card span2">
+      <h2>Jogo</h2>
+      <div class="grid">
+        <button id="saveButton" type="button">Salvar progresso</button>
+        <button id="summaryButton" type="button">Ver resumo</button>
+        <button id="newLifeButton" type="button">Nova vida</button>
+      </div>
+      <p id="gameMessage" class="muted"></p>
+    </div>
+  </div>
 </section>
 </main>
-<footer>Clover Time 🍀 • Cada escolha cria uma história diferente.</footer>
+<footer>Clover Time — versão de navegador</footer>
+
 <script>
-const $=id=>document.getElementById(id);
-const KEY="cloverTimeSave";
-let gender="Masculino",kingdom="Clover",p=null;
-const rand=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
-const pick=a=>a[rand(0,a.length-1)];
-const clamp=n=>Math.max(0,Math.min(100,n));
-const magic=[
-{name:"Fogo",icon:"🔥",spells:["Bola de Fogo","Chuva de Brasas","Dragão Flamejante"]},
-{name:"Água",icon:"💧",spells:["Lança Aquática","Maré Curativa","Tsunami Celeste"]},
-{name:"Vento",icon:"🌪️",spells:["Lâmina de Vento","Passo Aéreo","Tempestade Cortante"]},
-{name:"Terra",icon:"🪨",spells:["Punho Rochoso","Muralha de Terra","Titã de Pedra"]},
-{name:"Raio",icon:"⚡",spells:["Faísca","Relâmpago Azul","Julgamento Elétrico"]},
-{name:"Trevas",icon:"🌑",spells:["Corte Sombrio","Manto da Noite","Abismo Negro"]},
-{name:"Luz",icon:"☀️",spells:["Raio Luminoso","Passo de Luz","Aurora Sagrada"]},
-{name:"Plantas",icon:"🌿",spells:["Chicote de Vinhas","Jardim Vivo","Floresta Ancestral"]},
-{name:"Gelo",icon:"❄️",spells:["Agulhas de Gelo","Prisão Glacial","Avalanche Branca"]},
-{name:"Espaço",icon:"🌀",spells:["Dobra Espacial","Portal Breve","Domínio Dimensional"]},
-{name:"Sangue",icon:"🩸",spells:["Fio Carmesim","Lança Vital","Pacto Rubro"]},
-{name:"Tempo",icon:"⌛",spells:["Pulso Lento","Eco do Instante","Parada Temporal"]}
+"use strict";
+
+(function(){
+const $ = id => document.getElementById(id);
+const SAVE_KEY = "cloverTimeSave_v2";
+
+let player = null;
+
+const rand = (min,max) =>
+  Math.floor(Math.random()*(max-min+1))+min;
+
+const choose = list => list[rand(0,list.length-1)];
+
+const clamp = value => Math.max(0,Math.min(100,value));
+
+const magicTypes = [
+ {name:"Fogo",spells:["Bola de Fogo","Chuva de Brasas","Dragão Flamejante"]},
+ {name:"Água",spells:["Lança Aquática","Maré Curativa","Tsunami"]},
+ {name:"Vento",spells:["Lâmina de Vento","Passo Aéreo","Tempestade"]},
+ {name:"Terra",spells:["Punho Rochoso","Muralha de Terra","Titã de Pedra"]},
+ {name:"Raio",spells:["Faísca","Relâmpago Azul","Julgamento Elétrico"]},
+ {name:"Trevas",spells:["Corte Sombrio","Manto da Noite","Abismo Negro"]},
+ {name:"Luz",spells:["Raio Luminoso","Passo de Luz","Aurora Sagrada"]},
+ {name:"Plantas",spells:["Chicote de Vinhas","Jardim Vivo","Floresta Ancestral"]},
+ {name:"Gelo",spells:["Agulhas de Gelo","Prisão Glacial","Avalanche"]},
+ {name:"Espaço",spells:["Dobra Espacial","Portal Breve","Domínio Dimensional"]},
+ {name:"Sangue",spells:["Fio Carmesim","Lança Vital","Pacto Rubro"]},
+ {name:"Tempo",spells:["Pulso Lento","Eco do Instante","Parada Temporal"]}
 ];
-const families=[
-["família amorosa","Você cresceu cercado de apoio.",{happy:15}],
-["família humilde","Sua família tem pouco dinheiro, mas muito orgulho.",{money:35}],
-["família nobre","Você nasceu em uma casa influente.",{money:180,luck:8}],
-["órfão","Você precisou aprender a se virar cedo.",{happy:-12,luck:5}],
-["família ausente","Quase ninguém percebia seus esforços.",{happy:-8}],
-["família de magos","Você cresceu ouvindo histórias mágicas.",{manaMax:15,magic:8}],
-["família que rejeita magia","Seu talento mágico causava tensão em casa.",{happy:-12,magic:5}],
-["família perseguida","Seu passado guarda segredos.",{luck:-5,money:50}]
+
+const families = [
+ {name:"família amorosa",text:"Você cresceu recebendo apoio.",happy:12,money:40},
+ {name:"família humilde",text:"Sua família tem poucos recursos.",happy:4,money:15},
+ {name:"família nobre",text:"Você nasceu em uma família influente.",happy:4,money:180},
+ {name:"órfão",text:"Você precisou aprender a se virar cedo.",happy:-12,money:20},
+ {name:"família ausente",text:"Você raramente recebia atenção.",happy:-8,money:30},
+ {name:"família de magos",text:"A magia sempre fez parte da sua casa.",happy:5,money:60},
+ {name:"família que rejeita magia",text:"Seu potencial mágico causa conflitos.",happy:-12,money:35},
+ {name:"família perseguida",text:"Sua família guarda segredos perigosos.",happy:-4,money:50}
 ];
-const actionList=[
-["train","🏋️ Treinar","Melhore seu talento mágico"],
-["study","📚 Estudar","Aumente seu conhecimento"],
-["social","🤝 Socializar","Faça amizades"],
-["rest","🛌 Descansar","Recupere saúde e mana"],
-["work","🪙 Trabalhar","Ganhe moedas"],
-["adventure","🗺️ Aventura","Explore lugares perigosos"],
-["grimoire","📕 Treinar magia","Desperte ou fortaleça seu grimório"],
-["exam","⚔️ Exame mágico","Tente entrar numa ordem"],
-["duel","✨ Duelo","Enfrente outro mago"]
+
+const orders = [
+ "Leão Rubro","Águia Prateada","Touro Negro",
+ "Alvorecer Dourado","Pavão Coral","Rosa Azul",
+ "Orca Púrpura","Louva-a-deus Verde"
 ];
-function log(title,text){
-p.events.unshift({age:p.age,title,text});
-p.events=p.events.slice(0,60);
+
+const actionDefinitions = [
+ ["train","Treinar","Melhora o talento mágico"],
+ ["study","Estudar","Aumenta o conhecimento"],
+ ["social","Fazer amigos","Melhora a felicidade"],
+ ["rest","Descansar","Recupera saúde e mana"],
+ ["work","Trabalhar","Ganha dinheiro"],
+ ["adventure","Explorar","Aventura com riscos"],
+ ["grimoire","Treinar magia","Desperta ou treina o grimório"],
+ ["exam","Exame de cavaleiros","Tenta entrar em uma ordem"],
+ ["duel","Duelo mágico","Enfrenta outro mago"]
+];
+
+function message(text){
+ $("gameMessage").textContent = text;
 }
-function stat(key,amount){p[key]=clamp(p[key]+amount)}
-function startLife(){
-const family=pick(families),m=pick(magic);
-p={
-name:$("name").value.trim()||pick(["Aster","Noel","Mira","Kael","Nero","Liora"])+" "+pick(["Vale","Silva","Raven","Starfall","Blackthorn"]),
-gender,kingdom,age:0,money:rand(10,90),health:rand(55,98),
-happy:rand(40,90),looks:rand(25,96),luck:rand(15,90),
-magic:rand(20,95),manaMax:rand(45,115),mana:0,
-family:family[0],magicType:m.name,icon:m.icon,spells:[],
-grimoire:false,rarity:"",order:"Nenhuma",friends:0,knowledge:rand(0,20),
-alive:true,events:[],wins:0
-};
-Object.entries(family[2]).forEach(([k,v])=>{if(k==="money")p.money+=v;else if(k==="manaMax")p.manaMax+=v;else stat(k,v)});
-p.mana=p.manaMax;
-$("start").classList.add("hidden");$("game").classList.remove("hidden");
-log("Nascimento",`${p.name} nasceu no reino de ${kingdom}, em uma ${p.family}.`);
-log("Primeiro presságio",`Seu potencial mágico parece ser ${p.magic}/100. Sua afinidade é ${p.magicType}.`);
-render();
+
+function addEvent(title,text){
+ player.events.unshift({
+   age:player.age,
+   title:title,
+   text:text
+ });
+ player.events = player.events.slice(0,80);
 }
+
+function changeStat(key,amount){
+ player[key] = clamp(player[key]+amount);
+}
+
+function createLife(){
+ try {
+   const name = $("inputName").value.trim() ||
+     choose(["Aster Vale","Noel Silva","Mira Raven","Kael Frost","Liora Starfall"]);
+
+   const family = choose(families);
+   const affinity = choose(magicTypes);
+
+   player = {
+     name:name,
+     gender:$("inputGender").value,
+     kingdom:$("inputKingdom").value,
+     age:0,
+     money:family.money+rand(0,50),
+     health:rand(55,98),
+     happiness:clamp(rand(40,90)+family.happy),
+     looks:rand(25,96),
+     luck:rand(15,90),
+     magic:rand(20,95),
+     manaMax:rand(45,115),
+     mana:0,
+     family:family.name,
+     familyText:family.text,
+     magicType:affinity.name,
+     spells:[],
+     grimoire:false,
+     rarity:"",
+     order:"Nenhuma",
+     friends:0,
+     knowledge:rand(0,20),
+     wins:0,
+     alive:true,
+     events:[]
+   };
+
+   player.mana = player.manaMax;
+
+   addEvent("Nascimento",
+     player.name+" nasceu no reino de "+player.kingdom+". "+family.text);
+
+   addEvent("Primeiro presságio",
+     "Seu potencial mágico é "+player.magic+"/100. Sua afinidade é "+player.magicType+".");
+
+   $("creation").classList.add("hidden");
+   $("game").classList.remove("hidden");
+
+   render();
+   saveGame(false);
+   message("Sua vida começou. Faça uma ação ou avance um ano.");
+
+ } catch(error) {
+   $("startMessage").textContent =
+     "Erro ao iniciar: "+error.message+". Recarregue a página e tente novamente.";
+   console.error(error);
+ }
+}
+
+function renderStats(){
+ const definitions = [
+  ["health","Saúde",player.health,""],
+  ["happiness","Felicidade",player.happiness,""],
+  ["looks","Aparência",player.looks,""],
+  ["luck","Sorte",player.luck,""],
+  ["magic","Talento mágico",player.magic,"purple"],
+  ["mana","Mana",player.mana,"purple"]
+ ];
+
+ $("stats").innerHTML = definitions.map(item=>{
+   const key=item[0];
+   const value=item[2];
+   const percent=key==="mana"
+     ? (player.manaMax ? player.mana/player.manaMax*100 : 0)
+     : value;
+   const shown=key==="mana"
+     ? player.mana+"/"+player.manaMax
+     : value+"/100";
+
+   return '<div class="stat">'+
+    '<div class="stat-top"><span>'+item[1]+'</span><b>'+shown+'</b></div>'+
+    '<div class="bar"><div class="fill '+item[3]+'" style="width:'+Math.max(0,Math.min(100,percent))+'%"></div></div>'+
+    '</div>';
+ }).join("");
+}
+
+function renderEvents(){
+ $("events").innerHTML = player.events.map(event=>
+  '<div class="event">'+
+   '<div class="event-year">IDADE '+event.age+'</div>'+
+   '<div class="event-title">'+escapeHTML(event.title)+'</div>'+
+   '<div class="event-text">'+escapeHTML(event.text)+'</div>'+
+  '</div>'
+ ).join("");
+}
+
+function escapeHTML(text){
+ return String(text).replace(/[&<>"']/g,char=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ })[char]);
+}
+
 function render(){
-if(!p)return;
-$("pname").textContent=p.name;
-$("identity").textContent=p.gender+" • Reino de "+p.kingdom;
-$("avatar").textContent=p.grimoire?p.icon:(p.gender==="Masculino"?"🧙":"🧝");
-$("tags").innerHTML=`<span class="tag">${p.family}</span><span class="tag">${p.icon} ${p.magicType}</span>`;
-$("age").textContent="🎂 "+p.age+" anos";
-$("money").textContent="🪙 "+p.money+" moedas";
-$("order").textContent=p.order==="Nenhuma"?(p.grimoire?"📕 Grimório despertado":"📖 Vida comum"):"⚔️ "+p.order;
-const stats=[["health","❤️ Saúde",p.health],["happy","😊 Felicidade",p.happy],["looks","✨ Aparência",p.looks],["luck","🍀 Sorte",p.luck],["magic","🪄 Talento mágico",p.magic],["mana","🔮 Mana",p.mana]];
-$("stats").innerHTML=stats.map(([k,label,v])=>{
-let percent=k==="mana"?v/p.manaMax*100:v;
-let value=k==="mana"?`${v}/${p.manaMax}`:`${v}/100`;
-return `<div class="stat"><div class="statline"><span>${label}</span><b>${value}</b></div><div class="bar"><div class="fill" style="width:${Math.max(0,Math.min(100,percent))}%"></div></div></div>`;
-}).join("");
-$("booktitle").textContent=p.grimoire?`${p.rarity} • Grimório de ${p.magicType}`:"📕 O grimório ainda não despertou";
-$("booktext").textContent=p.grimoire?"Treine sua magia para desbloquear feitiços mais poderosos.":"A cerimônia tradicional acontece aos 15 anos.";
-$("spells").innerHTML=p.spells.length?p.spells.map(s=>`<span class="spell">${s}</span>`).join(""):'<span class="muted">Nenhum feitiço aprendido</span>';
-$("actions").innerHTML=actionList.map(([id,title,desc])=>`<button data-act="${id}" ${!p.alive?"disabled":""}>${title}<small>${desc}</small></button>`).join("");
-$("actions").querySelectorAll("button").forEach(b=>b.onclick=()=>act(b.dataset.act));
-$("year").disabled=!p.alive;
-$("destiny").textContent=!p.alive?"Sua história terminou. Você pode começar uma nova vida.":p.order!=="Nenhuma"?`Você pertence à ${p.order}. Domine ${p.magicType} e construa sua lenda.`:p.grimoire?`Seu grimório de ${p.magicType} despertou. Treine e tente entrar numa ordem.`:`Você tem ${Math.max(0,15-p.age)} anos até a idade tradicional do grimório.`;
-$("events").innerHTML=p.events.map(e=>`<div class="event"><small>IDADE ${e.age}</small><b>${e.title}</b><br>${e.text}</div>`).join("");
+ if(!player)return;
+
+ $("playerName").textContent=player.name;
+ $("playerInfo").textContent=player.gender+" • Reino de "+player.kingdom;
+ $("familyInfo").textContent=player.family;
+ $("avatar").textContent=player.name.slice(0,2).toUpperCase();
+ $("agePill").textContent="Idade: "+player.age;
+ $("moneyPill").textContent="Dinheiro: "+player.money;
+ $("rankPill").textContent=player.order==="Nenhuma"
+  ? (player.grimoire?"Portador de grimório":"Vida comum")
+  : player.order;
+
+ renderStats();
+
+ $("bookTitle").textContent=player.grimoire
+  ? "Grimório "+player.rarity+" — "+player.magicType
+  : "Grimório não despertado";
+
+ $("bookDescription").textContent=player.grimoire
+  ? "Treine para aprender novos feitiços."
+  : player.age<15
+    ? "A cerimônia tradicional acontece aos 15 anos."
+    : "Você já pode tentar despertar seu grimório.";
+
+ $("spells").innerHTML=player.spells.length
+  ? player.spells.map(s=>'<span class="spell">'+escapeHTML(s)+'</span>').join("")
+  : '<span class="muted">Nenhum feitiço conhecido.</span>';
+
+ $("actions").innerHTML=actionDefinitions.map(item=>
+  '<button type="button" data-action="'+item[0]+'" '+(!player.alive?'disabled':'')+'>'+
+  item[1]+'<small>'+item[2]+'</small></button>'
+ ).join("");
+
+ $("actions").querySelectorAll("[data-action]").forEach(button=>{
+   button.addEventListener("click",()=>performAction(button.dataset.action));
+ });
+
+ $("ageButton").disabled=!player.alive;
+ renderEvents();
 }
-function act(id){
-if(!p||!p.alive)return;
-if(id==="train"){
-stat("magic",rand(2,6));p.mana=Math.max(0,p.mana-rand(4,12));log("Treinamento",`Você treinou controle mágico. Talento: ${p.magic}/100.`);
-}
-if(id==="study"){
-p.knowledge=clamp(p.knowledge+rand(5,13));stat("magic",rand(0,2));log("Estudos",`Você estudou teoria mágica. Conhecimento: ${p.knowledge}/100.`);
-}
-if(id==="social"){
-p.friends++;stat("happy",rand(4,13));log("Novas conexões",`Você fez amizades. Agora tem ${p.friends} contatos importantes.`);
-}
-if(id==="rest"){
-stat("health",rand(8,18));stat("happy",rand(3,8));p.mana=Math.min(p.manaMax,p.mana+rand(15,30));log("Descanso","Você recuperou saúde, felicidade e mana.");
-}
-if(id==="work"){
-if(p.age<12){alert("Você ainda é jovem demais para trabalhar.");return}
-let n=rand(12,28);p.money+=n;log("Trabalho",`Você fez alguns serviços e ganhou ${n} moedas.`);
-}
-if(id==="adventure"){
-if(p.age<8){alert("Espere crescer um pouco antes de se aventurar.");return}
-let r=Math.random();
-if(r<.4){let n=rand(15,65);p.money+=n;log("Tesouro",`Você explorou ruínas e encontrou ${n} moedas.`)}
-else if(r<.65){stat("health",-rand(5,16));p.mana=Math.max(0,p.mana-rand(5,20));log("Perigo","Uma criatura atacou. Você escapou ferido.")}
-else if(r<.85){stat("magic",rand(3,8));p.manaMax+=rand(2,8);log("Fonte mágica","Uma fonte antiga expandiu seu potencial.")}
-else{stat("happy",10);p.friends++;log("Aliado","Você ajudou um viajante e ganhou um aliado.")}
-}
-if(id==="grimoire"){
-if(!p.grimoire){
-if(p.age<15){alert("A cerimônia do grimório acontece aos 15 anos.");return}
-p.grimoire=true;p.rarity=pick(["Comum","Incomum","Raro","Épico","Lendário"]);
-p.spells.push(magic.find(x=>x.name===p.magicType).spells[0]);
-stat("happy",12);
-log("O grimório despertou!",`Você recebeu um grimório ${p.rarity.toLowerCase()} de ${p.magicType}. Aprendeu ${p.spells[0]}!`);
-alert(`📕 SEU GRIMÓRIO DESPERTOU!\n\nRaridade: ${p.rarity}\nMagia: ${p.magicType}\nPrimeiro feitiço: ${p.spells[0]}`);
-}else{
-if(p.mana<8){alert("Mana insuficiente. Descanse primeiro.");return}
-p.mana-=8;stat("magic",rand(2,5));
-let list=magic.find(x=>x.name===p.magicType).spells;
-if(p.spells.length<3&&p.magic>35&&Math.random()<.65){
-let s=list[p.spells.length];p.spells.push(s);log("Novo feitiço",`Você aprendeu ${s}!`);
-}else log("Treino mágico","Seu controle sobre o grimório melhorou.");
-}}
-if(id==="exam"){
-if(p.age<15||!p.grimoire){alert("Você precisa ter 15 anos e possuir um grimório.");return}
-let chance=Math.min(92,15+p.magic*.38+p.knowledge*.28+p.luck*.18+p.spells.length*8);
-if(Math.random()*100<chance){
-p.order=pick(["Leão Rubro","Águia Prateada","Touro Negro","Alvorecer Dourado","Pavão Coral"]);
-p.money+=50;stat("happy",15);log("Aprovado!",`Você entrou para a ordem ${p.order}!`);
-alert("⚔️ APROVADO!\nVocê entrou para a ordem "+p.order+"!");
-}else{stat("happy",-5);log("Exame reprovado","Você não passou. Estude e treine antes de tentar novamente.");alert("Você não passou dessa vez. Continue treinando!")}
-}
-if(id==="duel"){
-if(!p.grimoire){alert("Você precisa de um grimório para duelar.");return}
-if(p.mana<12){alert("Mana insuficiente.");return}
-p.mana-=12;
-let power=p.magic+p.knowledge*.35+p.spells.length*12+rand(-15,20);
-if(power>rand(25,115)){p.wins++;p.money+=rand(10,35);stat("happy",6);stat("magic",2);log("Duelo vencido","Você venceu seu rival e ganhou moedas.");}
-else{stat("health",-rand(5,15));stat("happy",-3);log("Duelo perdido","Seu rival venceu. Você aprendeu com a derrota.");}
-}
-render();save(false);
-}
-function nextYear(){
-if(!p||!p.alive)return;
-p.age++;stat("health",-rand(0,3));stat("happy",-rand(0,2));p.mana=Math.min(p.manaMax,p.mana+rand(8,20));
-if(p.age===5)log("Primeiros sinais","Pequenos objetos vibraram quando você sentiu mana pela primeira vez.");
-if(p.age===10)log("Infância","Você percebe que nem todos possuem o mesmo potencial mágico.");
-if(p.age===15&&!p.grimoire)log("Cerimônia","Você já tem idade para receber seu grimório! Use Treinar magia.");
-if(p.age===18)log("Maioridade","Agora você pode tentar entrar para uma ordem de Cavaleiros Mágicos.");
-if(Math.random()<.7)randomEvent();
-log("Novo ano",`Você completou ${p.age} anos.`);
-if(p.health<=0){p.alive=false;log("Fim da vida",`${p.name} morreu aos ${p.age} anos.`);alert("🕯️ Sua vida terminou aos "+p.age+" anos. Veja o resumo ou comece outra vida.");}
-else if(p.age>=85&&Math.random()<.5){p.alive=false;log("Fim de uma era",`${p.name} faleceu aos ${p.age} anos.`);alert("🌅 Sua história terminou aos "+p.age+" anos.");}
-render();save(false);
-}
+
 function randomEvent(){
-let r=rand(1,7);
-if(r===1){stat("happy",rand(4,12));log("Dia feliz","Uma notícia boa melhorou seu humor.")}
-if(r===2){let n=rand(5,20);p.money+=n;log("Pequena descoberta",`Você encontrou ${n} moedas.`)}
-if(r===3){stat("health",-rand(3,12));log("Mal-estar","Uma febre mágica reduziu sua saúde.")}
-if(r===4){stat("luck",rand(2,8));log("Sorte","Um encontro inesperado trouxe uma oportunidade.")}
-if(r===5){p.friends++;stat("happy",5);log("Amizade","Você conheceu alguém interessante.")}
-if(r===6){p.knowledge=clamp(p.knowledge+rand(2,8));log("Livro antigo","Você aprendeu um pouco mais sobre magia.")}
-if(r===7){let n=rand(4,15);p.money=Math.max(0,p.money-n);log("Despesa","Você teve uma despesa inesperada de "+n+" moedas.")}
+ const result=rand(1,7);
+
+ if(result===1){
+  changeStat("happiness",rand(4,12));
+  addEvent("Um dia feliz","Uma boa notícia melhorou seu humor.");
+ }else if(result===2){
+  const amount=rand(5,20);
+  player.money+=amount;
+  addEvent("Dinheiro encontrado","Você encontrou "+amount+" moedas.");
+ }else if(result===3){
+  changeStat("health",-rand(3,12));
+  addEvent("Mal-estar","Uma febre mágica reduziu sua saúde.");
+ }else if(result===4){
+  changeStat("luck",rand(2,8));
+  addEvent("Sorte inesperada","Você teve uma oportunidade inesperada.");
+ }else if(result===5){
+  player.friends++;
+  changeStat("happiness",5);
+  addEvent("Nova amizade","Você conheceu alguém interessante.");
+ }else if(result===6){
+  player.knowledge=clamp(player.knowledge+rand(2,8));
+  addEvent("Livro antigo","Você aprendeu algo sobre magia.");
+ }else{
+  const amount=rand(4,15);
+  player.money=Math.max(0,player.money-amount);
+  addEvent("Despesa inesperada","Você gastou "+amount+" moedas.");
+ }
 }
-function save(show=true){
-if(!p)return;
-try{localStorage.setItem(KEY,JSON.stringify(p));if(show)alert("Vida salva neste navegador!")}
-catch(e){alert("Não foi possível salvar neste navegador.")}
+
+function performAction(action){
+ if(!player||!player.alive)return;
+
+ switch(action){
+ case "train":
+  changeStat("magic",rand(2,6));
+  player.mana=Math.max(0,player.mana-rand(4,12));
+  addEvent("Treinamento","Você praticou controle mágico. Talento: "+player.magic+"/100.");
+  break;
+
+ case "study":
+  player.knowledge=clamp(player.knowledge+rand(5,13));
+  changeStat("magic",rand(0,2));
+  addEvent("Estudos","Você estudou teoria mágica. Conhecimento: "+player.knowledge+"/100.");
+  break;
+
+ case "social":
+  player.friends++;
+  changeStat("happiness",rand(4,12));
+  addEvent("Vida social","Você conheceu pessoas. Amizades: "+player.friends+".");
+  break;
+
+ case "rest":
+  changeStat("health",rand(8,18));
+  changeStat("happiness",rand(3,8));
+  player.mana=Math.min(player.manaMax,player.mana+rand(15,30));
+  addEvent("Descanso","Você recuperou saúde, felicidade e mana.");
+  break;
+
+ case "work":
+  if(player.age<12){
+   message("Você precisa ter pelo menos 12 anos para trabalhar.");
+   return;
+  }
+  const pay=rand(12,28);
+  player.money+=pay;
+  addEvent("Trabalho","Você trabalhou e recebeu "+pay+" moedas.");
+  break;
+
+ case "adventure":
+  if(player.age<8){
+   message("Você ainda é jovem demais para explorar sozinho.");
+   return;
+  }
+  const roll=Math.random();
+  if(roll<0.4){
+   const coins=rand(15,65);
+   player.money+=coins;
+   addEvent("Tesouro","Você encontrou "+coins+" moedas em ruínas antigas.");
+  }else if(roll<0.65){
+   changeStat("health",-rand(5,16));
+   player.mana=Math.max(0,player.mana-rand(5,20));
+   addEvent("Perigo","Uma criatura atacou. Você escapou ferido.");
+  }else if(roll<0.85){
+   changeStat("magic",rand(3,8));
+   player.manaMax+=rand(2,8);
+   addEvent("Fonte mágica","Sua reserva máxima de mana aumentou.");
+  }else{
+   changeStat("happiness",10);
+   player.friends++;
+   addEvent("Aliado","Você ajudou um viajante e ganhou um aliado.");
+  }
+  break;
+
+ case "grimoire":
+  trainGrimoire();
+  break;
+
+ case "exam":
+  takeExam();
+  break;
+
+ case "duel":
+  duel();
+  break;
+ }
+
+ render();
+ saveGame(false);
 }
-function load(){
-try{let data=JSON.parse(localStorage.getItem(KEY)||"null");if(!data){alert("Nenhuma vida salva encontrada.");return}
-p=data;$("start").classList.add("hidden");$("game").classList.remove("hidden");render();alert("Vida carregada!");
-}catch(e){alert("O salvamento não pôde ser carregado.")}
+
+function trainGrimoire(){
+ if(!player.grimoire){
+  if(player.age<15){
+   message("A cerimônia tradicional acontece aos 15 anos.");
+   return;
+  }
+
+  player.grimoire=true;
+  player.rarity=choose(["Comum","Incomum","Raro","Épico","Lendário"]);
+  player.spells.push(magicTypes.find(m=>m.name===player.magicType).spells[0]);
+  changeStat("happiness",12);
+
+  addEvent("Grimório despertado",
+   "Você recebeu um grimório "+player.rarity.toLowerCase()+
+   " de "+player.magicType+" e aprendeu "+player.spells[0]+".");
+
+  message("Seu grimório despertou! Primeiro feitiço: "+player.spells[0]+".");
+  return;
+ }
+
+ if(player.mana<8){
+  message("Mana insuficiente. Descanse primeiro.");
+  return;
+ }
+
+ player.mana-=8;
+ changeStat("magic",rand(2,5));
+
+ const available=magicTypes.find(m=>m.name===player.magicType).spells;
+ if(player.spells.length<3&&player.magic>35&&Math.random()<0.65){
+  const spell=available[player.spells.length];
+  player.spells.push(spell);
+  addEvent("Novo feitiço","Você aprendeu "+spell+".");
+ }else{
+  addEvent("Treino mágico","Seu controle sobre o grimório melhorou.");
+ }
 }
-function restart(){
-if(confirm("Começar outra vida? O progresso atual será substituído.")){
-p=null;$("game").classList.add("hidden");$("start").classList.remove("hidden");
+
+function takeExam(){
+ if(player.age<15||!player.grimoire){
+  message("Você precisa ter 15 anos e possuir um grimório.");
+  return;
+ }
+
+ const chance=Math.min(92,
+  15+player.magic*0.38+player.knowledge*0.28+
+  player.luck*0.18+player.spells.length*8
+ );
+
+ if(Math.random()*100<chance){
+  player.order=choose(orders);
+  player.money+=50;
+  changeStat("happiness",15);
+  addEvent("Aprovado no exame","Você entrou para a ordem "+player.order+".");
+  message("Você foi aprovado e entrou para "+player.order+"!");
+ }else{
+  changeStat("happiness",-5);
+  addEvent("Exame reprovado","Você não passou. Treine e tente novamente.");
+  message("Você não passou desta vez. Continue treinando.");
+ }
 }
+
+function duel(){
+ if(!player.grimoire){
+  message("Você precisa de um grimório para duelar.");
+  return;
+ }
+ if(player.mana<12){
+  message("Mana insuficiente para o duelo.");
+  return;
+ }
+
+ player.mana-=12;
+ const power=player.magic+player.knowledge*0.35+
+  player.spells.length*12+rand(-15,20);
+
+ if(power>rand(25,115)){
+  player.wins++;
+  player.money+=rand(10,35);
+  changeStat("happiness",6);
+  changeStat("magic",2);
+  addEvent("Duelo vencido","Você venceu seu rival e ganhou moedas.");
+ }else{
+  changeStat("health",-rand(5,15));
+  changeStat("happiness",-3);
+  addEvent("Duelo perdido","Seu rival venceu. Você aprendeu com a derrota.");
+ }
 }
-function summary(){
-if(!p)return;
-alert(`${p.name}, ${p.age} anos\nReino: ${p.kingdom}\nFamília: ${p.family}\nMagia: ${p.magicType}\nGrimório: ${p.grimoire?p.rarity:"Não despertou"}\nOrdem: ${p.order}\nSaúde: ${p.health}/100\nFelicidade: ${p.happy}/100\nTalento mágico: ${p.magic}/100\nMana: ${p.mana}/${p.manaMax}\nDinheiro: ${p.money} moedas\nAmizades: ${p.friends}\nDuelos vencidos: ${p.wins}`);
+
+function advanceYear(){
+ if(!player||!player.alive)return;
+
+ player.age++;
+ changeStat("health",-rand(0,3));
+ changeStat("happiness",-rand(0,2));
+ player.mana=Math.min(player.manaMax,player.mana+rand(8,20));
+
+ if(player.age===5)
+  addEvent("Primeiros sinais","Você percebeu sua mana pela primeira vez.");
+
+ if(player.age===10)
+  addEvent("Infância","Você começa a entender seu potencial mágico.");
+
+ if(player.age===15&&!player.grimoire)
+  addEvent("Cerimônia dos grimórios","Você atingiu a idade para despertar seu grimório.");
+
+ if(player.age===18)
+  addEvent("Maioridade","Você pode buscar uma ordem de Cavaleiros Mágicos.");
+
+ if(Math.random()<0.7)randomEvent();
+
+ addEvent("Novo ano","Você completou "+player.age+" anos.");
+
+ if(player.health<=0){
+  player.health=0;
+  player.alive=false;
+  addEvent("Fim da vida",player.name+" morreu aos "+player.age+" anos.");
+  message("Sua vida terminou. Veja o resumo ou comece outra vida.");
+ }else if(player.age>=85&&Math.random()<0.5){
+  player.alive=false;
+  addEvent("Fim de uma era",player.name+" faleceu aos "+player.age+" anos.");
+  message("Sua história chegou ao fim.");
+ }else{
+  message("Você avançou para a idade de "+player.age+" anos.");
+ }
+
+ render();
+ saveGame(false);
 }
-$("genders").querySelectorAll("button").forEach(b=>b.onclick=()=>{
-gender=b.dataset.v;$("genders").querySelectorAll("button").forEach(x=>x.classList.toggle("selected",x===b));
-});
-$("kingdoms").querySelectorAll("button").forEach(b=>b.onclick=()=>{
-kingdom=b.dataset.v;$("kingdoms").querySelectorAll("button").forEach(x=>x.classList.toggle("selected",x===b));
-});
-$("begin").onclick=startLife;
-$("load").onclick=load;
-$("year").onclick=nextYear;
-$("save").onclick=()=>save(true);
-$("summary").onclick=summary;
-$("restart").onclick=restart;
-$("export").onclick=()=>{
-if(!p)return;
-let text=`${p.name} — ${p.age} anos | Reino ${p.kingdom} | Magia ${p.magicType} | Grimório ${p.rarity||"nenhum"} | Ordem ${p.order}`;
-if(navigator.clipboard)navigator.clipboard.writeText(text).then(()=>alert("Resumo copiado!")).catch(()=>alert(text));
-else alert(text);
-};
+
+function saveGame(showMessage=true){
+ if(!player)return;
+ try{
+  localStorage.setItem(SAVE_KEY,JSON.stringify(player));
+  if(showMessage)message("Progresso salvo neste navegador.");
+ }catch(error){
+  if(showMessage)message("Não foi possível salvar. Verifique as configurações do navegador.");
+ }
+}
+
+function loadGame(){
+ try{
+  const raw=localStorage.getItem(SAVE_KEY);
+  if(!raw){
+   $("startMessage").textContent="Nenhuma vida salva foi encontrada neste navegador.";
+   return;
+  }
+
+  const loaded=JSON.parse(raw);
+  if(!loaded||typeof loaded.name!=="string"||!Array.isArray(loaded.events)){
+   $("startMessage").textContent="O salvamento está inválido. Comece uma nova vida.";
+   return;
+  }
+
+  player=loaded;
+  $("creation").classList.add("hidden");
+  $("game").classList.remove("hidden");
+  render();
+  message("Vida carregada.");
+ }catch(error){
+  $("startMessage").textContent="Não foi possível carregar o salvamento.";
+ }
+}
+
+function showSummary(){
+ if(!player)return;
+ message(
+  player.name+" | "+player.age+" anos | Reino: "+player.kingdom+
+  " | Família: "+player.family+" | Magia: "+player.magicType+
+  " | Grimório: "+(player.grimoire?player.rarity:"não despertado")+
+  " | Ordem: "+player.order+" | Saúde: "+player.health+
+  " | Felicidade: "+player.happiness+" | Talento mágico: "+player.magic+
+  " | Mana: "+player.mana+"/"+player.manaMax+
+  " | Dinheiro: "+player.money+" | Amizades: "+player.friends+
+  " | Duelos vencidos: "+player.wins
+ );
+}
+
+function newLife(){
+ if(player&&!confirm("Começar outra vida? A vida atual será substituída."))return;
+ player=null;
+ $("game").classList.add("hidden");
+ $("creation").classList.remove("hidden");
+ $("startMessage").textContent="Escolha suas opções para começar.";
+}
+
+$("startButton").addEventListener("click",createLife);
+$("loadButton").addEventListener("click",loadGame);
+$("ageButton").addEventListener("click",advanceYear);
+$("saveButton").addEventListener("click",()=>saveGame(true));
+$("summaryButton").addEventListener("click",showSummary);
+$("newLifeButton").addEventListener("click",newLife);
+
 })();
 </script>
 </body>
-  </html>
-  
+</html>
