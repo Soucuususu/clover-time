@@ -3,722 +3,356 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="theme-color" content="#080710">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#101019">
 <title>Clover Time</title>
 <style>
-:root {
-  --bg:#080710; --panel:#141220; --panel2:#1c182b;
-  --purple:#a78bfa; --gold:#e7c878; --text:#f4f0ff;
-  --muted:#aaa3bd; --line:#302840; --green:#72e6a0;
+:root{
+  --bg:#101019;--panel:#1b1b29;--panel2:#242438;
+  --green:#51d68b;--gold:#f4ca68;--purple:#a88aff;
+  --text:#f5f3ff;--muted:#aaa9c2;--red:#ff7777
 }
-* { box-sizing:border-box; }
-body {
-  margin:0; background:var(--bg); color:var(--text);
-  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
-  min-height:100vh; overflow-x:hidden;
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;font-size:15px
 }
-button,input,select { font:inherit; }
-button { cursor:pointer; -webkit-tap-highlight-color:transparent; }
-button:disabled { opacity:.4; cursor:not-allowed; }
-#loading {
-  position:fixed; inset:0; z-index:100; background:#080710;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  text-align:center; overflow:hidden; transition:opacity .7s;
+button,input,select{font:inherit}
+button{
+  border:0;border-radius:10px;padding:13px;
+  background:var(--panel2);color:var(--text);
+  font-weight:700;cursor:pointer;transition:.15s
 }
-#loading h1 { font-size:clamp(42px,12vw,66px); letter-spacing:4px; margin:0; }
-.logo { color:var(--purple); text-shadow:0 0 30px #a78bfa77; }
-#loading p { color:var(--muted); letter-spacing:4px; font-size:11px; }
-.loadbar { width:68%; height:5px; background:#242032; border-radius:10px; overflow:hidden; margin-top:30px; }
-#loadfill { width:0; height:100%; background:linear-gradient(90deg,#7c3aed,#f472b6,#60a5fa); transition:width .2s; }
-.magic-particle { position:absolute; width:5px; height:5px; border-radius:50%; background:#c4b5fd; box-shadow:0 0 16px currentColor; animation:float 4s infinite ease-in-out; }
-@keyframes float { 0%,100%{transform:translateY(25px) scale(.7);opacity:.2} 50%{transform:translateY(-90px) scale(1.5);opacity:1} }
-@keyframes pulse { 50% { box-shadow:0 0 30px #a78bfa44; } }
-#app { max-width:520px; margin:auto; padding:0 13px 35px; display:none; }
-.topbar { display:flex; align-items:center; justify-content:space-between; padding:18px 2px 13px; }
-.brand { font-weight:900; letter-spacing:2px; font-size:18px; }
-.brand span { color:var(--purple); }
-.small { color:var(--muted); font-size:11px; }
-.card { background:linear-gradient(145deg,var(--panel2),var(--panel)); border:1px solid var(--line); border-radius:17px; padding:15px; margin-bottom:12px; }
-h2 { font-size:20px; margin:0 0 7px; }
-h3 { font-size:14px; margin:0 0 10px; }
-p { line-height:1.5; }
-.muted { color:var(--muted); }
-.grid { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
-.field { display:flex; flex-direction:column; gap:5px; margin-bottom:11px; }
-.field label { color:var(--muted); font-size:12px; }
-input,select {
-  width:100%; background:#0e0c17; color:var(--text); border:1px solid var(--line);
-  padding:12px; border-radius:10px; outline:none;
+button:active{transform:scale(.97)}
+button:disabled{opacity:.35;cursor:not-allowed}
+input,select{
+  width:100%;padding:13px;border:1px solid #38384e;
+  border-radius:10px;background:#141420;color:white;margin:6px 0 14px
 }
-input:focus,select:focus { border-color:var(--purple); }
-.btn {
-  border:1px solid var(--line); background:#211b31; color:var(--text);
-  padding:11px 12px; border-radius:11px; font-weight:650; font-size:13px;
-  width:100%; transition:transform .1s,border .2s;
+header{
+  position:sticky;top:0;z-index:5;padding:14px;
+  background:#101019ed;border-bottom:1px solid #29293a;
+  display:flex;justify-content:space-between;align-items:center
 }
-.btn:active { transform:scale(.97); }
-.primary { background:linear-gradient(110deg,#6d28d9,#8b5cf6); border:0; color:white; }
-.gold { background:linear-gradient(110deg,#9f7629,#d5b35c); color:#140f08; border:0; }
-.danger { border-color:#633448; color:#ff9cab; }
-.action-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-.action { text-align:left; min-height:68px; display:flex; flex-direction:column; justify-content:center; gap:5px; }
-.action b { font-size:13px; }
-.action small { color:var(--muted); font-size:11px; font-weight:400; }
-.hero { display:grid; grid-template-columns:100px 1fr; gap:14px; align-items:center; }
-.avatar {
-  height:124px; border-radius:15px; border:1px solid #524070;
-  background:radial-gradient(ellipse at 50% 20%,#514071,#171323 70%);
-  display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;
+.logo{font-size:22px;font-weight:900;letter-spacing:1px}
+.logo span{color:var(--green)}
+.small{font-size:12px;color:var(--muted)}
+main{max-width:680px;margin:auto;padding:14px 14px 100px}
+.card{
+  background:var(--panel);border:1px solid #2c2c41;
+  border-radius:15px;padding:16px;margin-bottom:13px
 }
-.avatar .person { font-size:65px; filter:drop-shadow(0 0 10px #b7a0ff66); transition:all .3s; }
-.avatar .aura { position:absolute; width:95px; height:95px; border-radius:50%; border:2px solid #c4b5fd55; animation:pulse 3s infinite; }
-.tag { display:inline-block; border:1px solid var(--line); background:#0f0d18; padding:5px 8px; border-radius:8px; font-size:10px; color:var(--muted); margin:2px 2px 0 0; }
-.tag.magic { color:#d8c8ff; border-color:#6e50a0; }
-.stat { margin:10px 0; }
-.statline { display:flex; justify-content:space-between; font-size:11px; margin-bottom:5px; }
-.track { background:#080710; border-radius:20px; height:7px; overflow:hidden; }
-.fill { height:100%; border-radius:20px; transition:width .3s; background:linear-gradient(90deg,#7c3aed,#b9a0ff); }
-.fill.green { background:linear-gradient(90deg,#16875b,#76edac); }
-.fill.red { background:linear-gradient(90deg,#a62e4e,#ff8a9f); }
-.fill.gold { background:linear-gradient(90deg,#a87925,#f4d37e); }
-.tabs { display:flex; gap:6px; overflow-x:auto; padding:3px 0 12px; scrollbar-width:none; }
-.tabs button { flex:0 0 auto; width:auto; padding:9px 12px; font-size:11px; }
-.tabs button.active { background:#6d28d9; border-color:#a78bfa; }
-.section-title { display:flex; justify-content:space-between; align-items:center; margin:3px 0 10px; }
-.log { max-height:290px; overflow:auto; }
-.event { border-left:2px solid #8b5cf6; background:#100e19; padding:10px 11px; margin-bottom:8px; border-radius:0 10px 10px 0; font-size:12px; line-height:1.5; }
-.event .year { color:var(--purple); font-size:10px; font-weight:800; margin-bottom:3px; }
-.event.positive { border-color:var(--green); }
-.event.negative { border-color:#fb7185; }
-.notice { background:#201a30; border:1px solid #49365e; padding:11px; border-radius:10px; font-size:12px; margin-bottom:10px; }
-.locked { opacity:.7; border-style:dashed; }
-.big-number { font-size:24px; font-weight:850; }
-.hidden { display:none!important; }
-.footer { text-align:center; color:#69617c; font-size:10px; padding:15px 0; }
-hr { border:0; border-top:1px solid var(--line); margin:13px 0; }
-@media(min-width:420px) { #app { padding-left:18px; padding-right:18px; } }
+h1,h2,h3,p{margin-top:0}
+h2{font-size:19px;margin-bottom:12px}
+h3{font-size:15px}
+.muted{color:var(--muted)}
+.green{color:var(--green)}.gold{color:var(--gold)}
+.purple{color:var(--purple)}
+.row{display:flex;gap:8px;align-items:center}
+.row>*{flex:1;min-width:0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.action{
+  text-align:left;display:flex;align-items:center;gap:10px;
+  width:100%;margin:0 0 8px;background:#242438;
+  border:1px solid #34344b;padding:12px
+}
+.action .emoji{font-size:24px}
+.action small{display:block;color:var(--muted);font-weight:400;margin-top:4px}
+.primary{background:#28794f;color:white}
+.goldbtn{background:#705a28;color:#fff1bf}
+.danger{background:#632f3a}
+.stat{margin:10px 0}
+.statline{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
+.bar{height:7px;background:#303044;border-radius:8px;overflow:hidden}
+.bar div{height:100%;background:var(--green);border-radius:8px}
+#loading,#creation{
+  position:fixed;inset:0;z-index:20;background:
+  radial-gradient(ellipse at 50% 25%,#35285f 0%,#171527 38%,#0b0b12 80%);
+  display:flex;align-items:center;justify-content:center;padding:22px;
+  overflow:auto
+}
+.loadbox{width:min(440px,100%);text-align:center}
+.magic-orb{
+  margin:25px auto;width:150px;height:150px;border-radius:50%;
+  display:grid;place-items:center;font-size:65px;
+  border:2px solid #9d8aff;
+  box-shadow:0 0 25px #8b5cf6, inset 0 0 30px #8b5cf655;
+  animation:float 2.4s ease-in-out infinite
+}
+@keyframes float{50%{transform:translateY(-10px) rotate(5deg);filter:brightness(1.3)}}
+.loadbar{height:8px;background:#333047;border-radius:9px;overflow:hidden;margin:22px 0}
+.loadbar div{height:100%;width:0;background:linear-gradient(90deg,#5fe3a0,#a78bfa,#f4ca68)}
+#loadtext{color:#d0c8f9;font-size:13px;min-height:20px}
+.hidden{display:none!important}
+.bottomnav{
+  position:fixed;bottom:0;left:0;right:0;z-index:8;
+  display:flex;justify-content:space-around;padding:8px 3px;
+  padding-bottom:max(8px,env(safe-area-inset-bottom));
+  background:#14141ff5;border-top:1px solid #303044
+}
+.bottomnav button{background:transparent;padding:8px 4px;font-size:11px;flex:1}
+.bottomnav button span{display:block;font-size:20px;margin-bottom:4px}
+.bottomnav button.active{color:var(--green)}
+#toast{
+  position:fixed;bottom:82px;left:12px;right:12px;z-index:15;
+  background:#26253a;border:1px solid #69608f;border-radius:15px;
+  padding:13px;display:none;box-shadow:0 8px 35px #0008
+}
+.toasttop{display:flex;gap:12px;align-items:center}
+.toastimg{font-size:35px}
+#eventlog p{font-size:13px;padding:9px 0;border-bottom:1px solid #303044;margin:0}
+.tag{display:inline-block;padding:5px 8px;border-radius:7px;background:#303047;color:#d4c8ff;font-size:11px;margin:2px}
+#magicfx{
+ position:fixed;inset:0;z-index:30;pointer-events:none;display:none;
+ background:radial-gradient(circle,#bca0ff66,transparent 65%);
+ animation:flash .45s ease-out
+}
+@keyframes flash{0%{opacity:1}100%{opacity:0}}
+@media(min-width:550px){main{padding-top:20px}.bottomnav{left:calc(50% - 340px);right:calc(50% - 340px);border-radius:14px 14px 0 0}}
 </style>
 </head>
 <body>
 
 <div id="loading">
-  <div id="particles"></div>
-  <div class="logo"><h1>CLOVER</h1><h1 style="font-size:34px">TIME</h1></div>
-  <p>YOUR STORY · YOUR MAGIC · YOUR DESTINY</p>
-  <div class="loadbar"><div id="loadfill"></div></div>
-  <p id="loadtext">DESPERTANDO A MANA...</p>
+ <div class="loadbox">
+  <div class="logo">🍀 CLOVER <span>TIME</span></div>
+  <div class="magic-orb" id="loadorb">🍀</div>
+  <h1>Seu destino está sendo escrito</h1>
+  <p class="muted">Em um reino onde a magia decide o futuro, toda história começa pequena.</p>
+  <div class="loadbar"><div id="loadprogress"></div></div>
+  <div id="loadtext">Conectando aos grimórios...</div>
+  <p class="small">Uma vida. Um destino. Mil possibilidades.</p>
+ </div>
 </div>
 
-<div id="app">
-  <header class="topbar">
-    <div class="brand">CLOVER <span>TIME</span></div>
-    <button class="btn" style="width:auto;padding:8px 11px" onclick="saveGame(true)">Salvar</button>
-  </header>
-
-  <main id="creation" class="hidden">
-    <div class="card">
-      <div class="small">CRIE SUA PRÓPRIA LENDA</div>
-      <h2>Uma nova vida começa.</h2>
-      <p class="muted" style="font-size:13px">Suas origens influenciam seus talentos, sua magia e seu futuro. Nem todo destino pode ser escolhido.</p>
-      <div class="field"><label>Nome do personagem</label><input id="name" maxlength="22" placeholder="Nome do seu mago"></div>
-      <div class="grid">
-        <div class="field"><label>Gênero</label><select id="gender"><option value="Masculino">Masculino</option><option value="Feminino">Feminino</option><option value="Outro">Outro</option></select></div>
-        <div class="field"><label>Reino de nascimento</label><select id="kingdom"><option>Clover</option><option>Spade</option><option>Heart</option><option>Diamond</option></select></div>
-        <div class="field"><label>Raça</label><select id="race"><option>Humano</option><option>Elfo</option><option>Híbrido</option><option>Descendente demoníaco</option></select></div>
-        <div class="field"><label>Origem familiar</label><select id="family"><option>Plebeia</option><option>Nobre</option><option>Realeza</option><option>Órfão</option></select></div>
-      </div>
-      <div class="field"><label>Classe inicial</label><select id="class"><option>Aprendiz</option><option>Prodígio</option><option>Guerreiro mágico</option><option>Estudioso</option><option>Curandeiro</option></select></div>
-      <div class="field">
-        <label>Origem dos mundos</label>
-        <select id="world"><option value="Humano">Mundo Humano — disponível</option><option value="Submundo" disabled>Submundo dos Demônios — bloqueado</option></select>
-      </div>
-      <div class="notice">O Submundo aparece nos registros antigos, mas não pode ser escolhido na criação. Talvez você descubra um caminho até ele durante sua jornada.</div>
-      <button class="btn primary" onclick="createLife()">DESPERTAR UMA NOVA VIDA</button>
-      <button class="btn" style="margin-top:8px" onclick="loadGame()">Continuar vida salva</button>
-    </div>
-  </main>
-
-  <main id="game" class="hidden">
-    <div class="card hero">
-      <div class="avatar"><div class="aura"></div><div class="person" id="avatar">🧙</div></div>
-      <div>
-        <div class="small" id="stage">INFÂNCIA</div>
-        <h2 id="charname">Mago</h2>
-        <div class="muted" id="bio" style="font-size:12px"></div>
-        <div id="tags"></div>
-        <div style="margin-top:8px;font-size:12px">Idade: <b id="age">0</b> · <b id="year">Ano 1</b></div>
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="card"><div class="small">PATRIMÔNIO</div><div class="big-number" id="money">0</div><div class="small">moedas</div></div>
-      <div class="card"><div class="small">REPUTAÇÃO</div><div class="big-number" id="rep">0</div><div class="small">pontos de fama</div></div>
-    </div>
-
-    <div class="tabs" id="tabs">
-      <button class="btn active" data-tab="life" onclick="tab('life',this)">Vida</button>
-      <button class="btn" data-tab="magic" onclick="tab('magic',this)">Magia</button>
-      <button class="btn" data-tab="career" onclick="tab('career',this)">Carreira</button>
-      <button class="btn" data-tab="world" onclick="tab('world',this)">Explorar</button>
-      <button class="btn" data-tab="social" onclick="tab('social',this)">Relações</button>
-      <button class="btn" data-tab="records" onclick="tab('records',this)">Histórico</button>
-    </div>
-
-    <section id="panel-life">
-      <div class="card">
-        <div class="section-title"><h3>Estado do personagem</h3><span class="small" id="healthstatus">Estável</span></div>
-        <div id="stats"></div>
-      </div>
-      <div class="card">
-        <h3>Atividades da vida</h3>
-        <div class="action-grid">
-          <button class="btn action" onclick="activity('rest')"><b>Descansar</b><small>Recupera energia · 1 dia</small></button>
-          <button class="btn action" onclick="activity('appearance')"><b>Cuidar da aparência</b><small>Melhora seu visual · 3 dias</small></button>
-          <button class="btn action" onclick="activity('study')"><b>Estudar</b><small>Inteligência · 7 dias</small></button>
-          <button class="btn action" onclick="activity('train')"><b>Treinar o corpo</b><small>Força e resistência · 3 dias</small></button>
-          <button class="btn action" onclick="activity('meditate')"><b>Meditar</b><small>Controle de mana · 2 dias</small></button>
-          <button class="btn action" onclick="activity('hobby')"><b>Praticar um hobby</b><small>Felicidade · 2 dias</small></button>
-          <button class="btn action" onclick="activity('health')"><b>Cuidar da saúde</b><small>Tratamento · 2 dias</small></button>
-          <button class="btn action" onclick="activity('volunteer')"><b>Ajudar pessoas</b><small>Reputação · 4 dias</small></button>
-        </div>
-      </div>
-      <div class="card">
-        <h3>Avançar a vida</h3>
-        <p class="muted" style="font-size:12px">Seu aniversário traz acontecimentos, mudanças familiares, oportunidades e riscos. Algumas decisões não podem ser desfeitas.</p>
-        <button class="btn gold" onclick="ageUp()">AVANÇAR 1 ANO</button>
-      </div>
-    </section>
-
-    <section id="panel-magic" class="hidden">
-      <div class="card">
-        <h3>Seu grimório</h3>
-        <div id="magicinfo"></div>
-        <hr>
-        <div class="grid">
-          <button class="btn action" onclick="activity('magictrain')"><b>Treinar magia</b><small>7 dias</small></button>
-          <button class="btn action" onclick="activity('grimoire')"><b>Estudar grimório</b><small>5 dias</small></button>
-          <button class="btn action" onclick="activity('spelltest')"><b>Testar um feitiço</b><small>1 dia</small></button>
-          <button class="btn action" onclick="activity('tournament')"><b>Torneio mágico</b><small>A partir dos 15</small></button>
-        </div>
-      </div>
-      <div class="card"><h3>Feitiços desbloqueados</h3><div id="spells"></div></div>
-      <div class="card"><h3>Biblioteca de afinidades</h3><div id="affinities"></div></div>
-    </section>
-
-    <section id="panel-career" class="hidden">
-      <div class="card">
-        <h3>Educação</h3><div id="schoolinfo"></div>
-        <div class="action-grid" style="margin-top:10px">
-          <button class="btn action" onclick="activity('school')"><b>Frequentar aulas</b><small>7 dias</small></button>
-          <button class="btn action" onclick="activity('exam')"><b>Fazer exame</b><small>Requer preparação</small></button>
-        </div>
-      </div>
-      <div class="card">
-        <h3>Mercado de trabalho</h3>
-        <p class="muted" style="font-size:12px">Você precisa ter idade suficiente e cumprir os requisitos. Candidaturas podem ser recusadas.</p>
-        <div id="jobs"></div>
-        <div class="action-grid" style="margin-top:9px">
-          <button class="btn primary" onclick="findJobs()">Procurar vagas</button>
-          <button class="btn" onclick="workDay()">Trabalhar 1 dia</button>
-        </div>
-        <div id="jobresult" class="muted" style="font-size:12px;margin-top:9px"></div>
-      </div>
-      <div class="card">
-        <h3>Esquadrões mágicos</h3><div id="knights"></div>
-        <div class="action-grid" style="margin-top:9px">
-          <button class="btn" onclick="tryKnights()">Tentar entrar</button>
-          <button class="btn" onclick="promote()">Buscar promoção</button>
-        </div>
-        <hr>
-        <h3>Objetivo supremo</h3><div id="wizardking"></div>
-        <button class="btn gold" style="margin-top:9px" onclick="pursueKing()">Buscar o título de Rei Mago</button>
-      </div>
-    </section>
-
-    <section id="panel-world" class="hidden">
-      <div class="card">
-        <h3>Exploração do mundo</h3>
-        <p class="muted" style="font-size:12px">Explorar consome tempo. Você pode encontrar tesouros, conhecimento, aliados ou perigos.</p>
-        <div class="action-grid">
-          <button class="btn action" onclick="explore('forest')"><b>Floresta mágica</b><small>3 dias</small></button>
-          <button class="btn action" onclick="explore('ruins')"><b>Ruínas antigas</b><small>10 dias</small></button>
-          <button class="btn action" onclick="explore('dungeon')"><b>Masmorra</b><small>7 dias</small></button>
-          <button class="btn action" onclick="explore('market')"><b>Mercado</b><small>1 dia</small></button>
-          <button class="btn action" onclick="explore('library')"><b>Biblioteca real</b><small>3 dias</small></button>
-          <button class="btn action" onclick="explore('underworld')"><b>Investigar o Submundo</b><small>Missão perigosa</small></button>
-        </div>
-      </div>
-      <div class="card">
-        <h3>Inventário e descobertas</h3><div id="inventory"></div>
-      </div>
-      <div class="card locked">
-        <h3>Submundo dos Demônios</h3>
-        <p style="font-size:12px">A passagem permanece fechada. Descubra inscrições, relíquias e pistas antes de tentar atravessar. Esta área ainda não é um destino selecionável.</p>
-        <div id="underworldinfo"></div>
-      </div>
-    </section>
-
-    <section id="panel-social" class="hidden">
-      <div class="card">
-        <h3>Família</h3><div id="familyinfo"></div>
-        <button class="btn" style="margin-top:10px" onclick="activity('family')">Passar tempo com a família · 2 dias</button>
-      </div>
-      <div class="card">
-        <h3>Vida social</h3><div id="socialinfo"></div>
-        <div class="action-grid" style="margin-top:10px">
-          <button class="btn action" onclick="activity('friend')"><b>Fazer amizade</b><small>3 dias</small></button>
-          <button class="btn action" onclick="activity('date')"><b>Conhecer alguém</b><small>A partir dos 16</small></button>
-          <button class="btn action" onclick="activity('rival')"><b>Desafiar um rival</b><small>3 dias</small></button>
-          <button class="btn action" onclick="activity('reputation')"><b>Construir reputação</b><small>5 dias</small></button>
-        </div>
-      </div>
-    </section>
-
-    <section id="panel-records" class="hidden">
-      <div class="card">
-        <h3>Registro da sua história</h3>
-        <div id="summary"></div>
-        <hr><h3>Acontecimentos recentes</h3><div class="log" id="log"></div>
-      </div>
-      <div class="card">
-        <h3>Dados e salvamento</h3>
-        <button class="btn" onclick="saveGame(true)">Salvar progresso</button>
-        <button class="btn danger" style="margin-top:8px" onclick="newLife()">Começar outra vida</button>
-      </div>
-    </section>
-    <div class="footer">CLOVER TIME · SUA HISTÓRIA AINDA ESTÁ SENDO ESCRITA</div>
-  </main>
+<div id="creation" class="hidden">
+ <div class="loadbox">
+  <div class="logo">🍀 CLOVER <span>TIME</span></div>
+  <h1>O início da sua história</h1>
+  <p class="muted">Escolha apenas como sua vida começa. O resto será decidido pelo destino.</p>
+  <label for="playername">Nome do personagem</label>
+  <input id="playername" maxlength="22" placeholder="Digite seu nome">
+  <label for="gender">Gênero</label>
+  <select id="gender"><option value="Masculino">Masculino</option><option value="Feminino">Feminino</option></select>
+  <label for="kingdom">Reino de nascimento</label>
+  <select id="kingdom">
+   <option value="Reino Clover">Reino Clover</option>
+   <option value="Reino Heart">Reino Heart</option>
+   <option value="Reino Diamond">Reino Diamond</option>
+   <option value="Reino Spade">Reino Spade</option>
+  </select>
+  <button class="primary" style="width:100%" onclick="startLife()">🍀 Começar minha vida</button>
+  <p class="small" style="margin-top:13px">Afinidade mágica, origem, bênçãos e talentos serão descobertos durante a história.</p>
+ </div>
 </div>
 
+<header>
+ <div><div class="logo">🍀 CLOVER <span>TIME</span></div><div class="small" id="headerkingdom">Sua história mágica</div></div>
+ <button onclick="toggleSound()" id="soundbtn" style="padding:9px">🔊</button>
+</header>
+
+<main id="game" class="hidden">
+ <section class="card">
+  <div class="row">
+   <div>
+    <div class="small">SUA VIDA</div>
+    <h2 id="pname" style="margin:5px 0">Personagem</h2>
+    <div id="identity" class="muted">Idade 0</div>
+   </div>
+   <div style="text-align:right;font-size:37px" id="portrait">👶</div>
+  </div>
+  <div style="margin-top:12px" id="badges"></div>
+  <div class="grid" style="margin-top:12px">
+   <div><div class="small">💰 Dinheiro</div><b id="money">0</b></div>
+   <div><div class="small">✨ Mana</div><b id="mana">0</b></div>
+   <div><div class="small">❤️ Saúde</div><b id="health">100</b></div>
+   <div><div class="small">😊 Felicidade</div><b id="happiness">100</b></div>
+  </div>
+ </section>
+
+ <section class="card" id="overview">
+  <h2>📜 Resumo da vida</h2>
+  <p id="summary" class="muted">Sua jornada começa aqui.</p>
+  <div id="stats"></div>
+ </section>
+
+ <section class="card">
+  <h2>⏳ Próximo ano</h2>
+  <p class="muted" id="yearhint">O tempo passa, e sua história avança.</p>
+  <button class="primary" style="width:100%" onclick="ageUp()">🎂 Completar mais um ano</button>
+ </section>
+
+ <section class="card" id="activities">
+  <h2>🎯 Atividades disponíveis</h2>
+  <div id="actionlist"></div>
+ </section>
+
+ <section class="card" id="magicpanel">
+  <h2>📖 Caminho mágico</h2>
+  <div id="magiccontent"></div>
+ </section>
+
+ <section class="card">
+  <h2>📰 Diário da sua vida</h2>
+  <div id="eventlog"><p>Sua história ainda está começando.</p></div>
+ </section>
+
+ <section class="card">
+  <h2>🌑 Mistérios do mundo</h2>
+  <p class="muted">Há lugares que não devem ser encontrados tão cedo.</p>
+  <div id="lockedworld" class="tag">🔒 Submundo dos Demônios — desconhecido</div>
+ </section>
+</main>
+
+<nav class="bottomnav hidden" id="nav">
+ <button class="active" onclick="showSection('overview',this)"><span>🏠</span>Vida</button>
+ <button onclick="showSection('activities',this)"><span>🎯</span>Atividades</button>
+ <button onclick="showSection('magicpanel',this)"><span>✨</span>Magia</button>
+ <button onclick="showSection('eventlog',this)"><span>📜</span>Diário</button>
+</nav>
+
+<div id="toast">
+ <div class="toasttop"><div class="toastimg" id="toastimg">✨</div>
+ <div><b id="toasttitle">Acontecimento</b><div id="toasttext" class="small" style="margin-top:5px"></div></div></div>
+</div>
+<div id="magicfx"></div>
 <script>
 "use strict";
+const $=id=>document.getElementById(id);
+const rand=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const clamp=(n,min=0,max=100)=>Math.max(min,Math.min(max,n));
 
-const $ = id => document.getElementById(id);
-const rand = n => Math.floor(Math.random()*n);
-const chance = p => Math.random()*100 < p;
-const pick = arr => arr[rand(arr.length)];
-const clamp = (v,min=0,max=100) => Math.max(min,Math.min(max,v));
-const fmt = n => Math.floor(n).toLocaleString("pt-BR");
-
-const MAGIC = [
+const AFFINITIES=[
  "Fogo","Água","Vento","Terra","Relâmpago","Gelo","Luz","Trevas",
- "Plantas","Aço","Cristal","Areia","Fumaça","Som","Espaço","Tempo",
- "Gravidade","Sangue","Cura","Veneno","Espelhos","Correntes","Cinzas",
- "Lava","Tempestade","Neve","Madeira","Bestas","Insetos","Estrelas",
- "Lua","Sol","Sonhos","Memória","Barreiras","Armadura","Explosão",
- "Vácuo","Runas","Oráculos","Caos","Antimagia","Éter","Demoníaca"
+ "Plantas","Árvore","Metal","Areia","Cristal","Espaço","Tempo","Gravidade",
+ "Sangue","Espelho","Fumaça","Cinzas","Som","Vibração","Aço","Veneno",
+ "Fios","Papel","Bússola","Sonhos","Memória","Maldição","Bestas","Insetos",
+ "Lava","Neve","Explosão","Barreira","Cura","Selos","Oráculos","Distorção",
+ "Estrelas","Lua","Sol","Caos"
 ];
 
-const ATTACKS = [
- "Projétil Arcano","Lança Mágica","Rajada Concentrada","Explosão Elemental",
- "Lâmina de Mana","Chuva de Fragmentos","Círculo Destruidor",
- "Fera Invocada","Canhão Arcano","Técnica Suprema"
-];
+const ATTACKS={
+ "Fogo":["Bola de Fogo","Lança Flamejante","Manto de Chamas","Explosão Escarlate","Dragão de Fogo","Chuva de Brasas","Punho Vulcânico","Círculo Ardente","Fênix Rubra","Inferno Supremo"],
+ "Água":["Jato Aquático","Lança de Água","Torrente","Prisão Líquida","Serpente Marinha","Chuva Cortante","Tsunami","Lâmina Oceânica","Dragão Abissal","Mar Supremo"],
+ "Vento":["Corte de Vento","Lâmina Aérea","Tornado","Passo do Vendaval","Furacão","Lanças de Ar","Tempestade","Dragão Celeste","Ciclone Supremo","Céu Partido"],
+ "Relâmpago":["Faísca","Raio Rápido","Lança Elétrica","Passo Relâmpago","Cadeia de Raios","Tempestade Elétrica","Punho Trovejante","Dragão de Trovão","Juízo Celeste","Relâmpago Supremo"]
+};
+const DEFAULT_ATTACKS=["Disparo Mágico","Lança Arcana","Círculo de Mana","Impacto Mágico","Rajada Arcana","Prisão de Energia","Explosão Arcana","Lâmina de Mana","Tempestade Arcana","Magia Suprema"];
 
-const JOBS = [
- {name:"Ajudante de loja",age:10,int:0,pay:8,rep:1},
- {name:"Mensageiro do reino",age:12,int:10,pay:12,rep:2},
- {name:"Aprendiz de artesão",age:13,int:15,pay:16,rep:2},
- {name:"Assistente de biblioteca",age:14,int:25,pay:18,rep:3},
- {name:"Curandeiro aprendiz",age:15,int:30,pay:25,rep:4},
- {name:"Pesquisador mágico",age:16,int:45,pay:35,rep:5},
- {name:"Explorador licenciado",age:16,int:30,pay:38,rep:6},
- {name:"Cavaleiro mágico",age:18,int:45,pay:55,rep:10},
- {name:"Instrutor de magia",age:20,int:65,pay:70,rep:8},
- {name:"Capitão de esquadrão",age:25,int:75,pay:150,rep:20}
-];
+let P=null, soundOn=true, audioCtx=null, toastTimer=null, currentTab="overview";
+let busy=false;
 
-const KNIGHTS = [
- "Touros Negros","Alvorecer Dourado","Leões Carmesins","Rosas Azuis",
- "Águias Prateadas","Louva-a-Deus Verdes","Cervos Celestes","Orcas Púrpuras",
- "Pavões Corais"
-];
-
-let G = null;
-let currentTab = "life";
-let lastJobOffers = [];
-
-function newState(data) {
- return Object.assign({
-  name:"Mago",gender:"Masculino",kingdom:"Clover",race:"Humano",
-  familyOrigin:"Plebeia",className:"Aprendiz",world:"Humano",
-  age:0,days:0,money:50,rep:0,health:100,happiness:75,
-  looks:50,luck:50,intelligence:30,strength:20,energy:100,
-  mana:30,magicPower:15,control:10,magic:"Fogo",blessed:false,
-  grimoire:false,spells:[],spellLevel:0,schoolLevel:0,examPassed:false,
-  job:null,jobExperience:0,knightOrder:null,knightRank:0,
-  friends:0,relationship:null,children:0,married:false,
-  familyAlive:{father:true,mother:true},familyBond:60,
-  inventory:[],ruins:0,clues:0,underworldProgress:0,
-  titles:[],achievements:[],ageYear:0,alive:true,ending:"",
-  log:[],stats:{training:0,explorations:0,duels:0,workDays:0},
-  seenEvents:[]
- },data||{});
-}
-
-function createLife() {
- const name=$("name").value.trim();
- if(!name){alert("Digite o nome do seu personagem.");$("name").focus();return;}
- G=newState({
-  name,gender:$("gender").value,kingdom:$("kingdom").value,
-  race:$("race").value,familyOrigin:$("family").value,
-  className:$("class").value,world:$("world").value
- });
- G.magic=pick(MAGIC);
- G.money=G.familyOrigin==="Realeza"?1500:G.familyOrigin==="Nobre"?350:50;
- G.intelligence=G.className==="Estudioso"?45:30;
- G.magicPower=G.className==="Prodígio"?30:15;
- G.health=G.race==="Híbrido"?110:100;
- if(G.familyOrigin==="Órfão")G.familyAlive={father:false,mother:false};
- G.blessed=chance(G.className==="Prodígio"?12:4);
- if(G.race==="Descendente demoníaco"&&chance(35))G.magic="Demoníaca";
- if(G.kingdom==="Heart"&&chance(35))G.control+=8;
- if(G.kingdom==="Spade"&&chance(30))G.strength+=10;
- if(G.kingdom==="Diamond"&&chance(30))G.intelligence+=10;
- if(G.blessed){G.magicPower+=15;G.luck+=10;}
- G.log=[];
- event("Nascimento","Você nasceu no Reino de "+G.kingdom+". Sua família e suas origens vão influenciar sua jornada.",true);
- if(G.blessed)event("Presságio raro","Desde o nascimento, sua mana apresenta uma característica abençoada.",true);
- if(G.race==="Elfo")event("Herança élfica","Você possui uma herança élfica. Seu potencial mágico pode crescer de forma diferente.");
- if(G.familyOrigin==="Órfão")event("Infância difícil","Você começa a vida sem seus pais. Sua história será construída a partir daqui.",false);
- $("creation").classList.add("hidden");$("game").classList.remove("hidden");
- currentTab="life";render();saveGame(false);
-}
-
-function loadGame() {
- try{
-  const raw=localStorage.getItem("cloverTimeSave");
-  if(!raw){alert("Nenhuma vida salva neste navegador.");return;}
-  const data=JSON.parse(raw);
-  if(!data||!data.name||!Array.isArray(data.log))throw new Error("save");
-  G=newState(data);
-  $("creation").classList.add("hidden");$("game").classList.remove("hidden");
-  render();event("Retorno","Você voltou para sua jornada.",true);render();
- }catch(e){alert("Não foi possível carregar essa vida. Crie um novo personagem.");}
-}
-
-function saveGame(show) {
- if(!G){if(show)alert("Crie uma vida antes de salvar.");return;}
- try{
-  localStorage.setItem("cloverTimeSave",JSON.stringify(G));
-  if(show)alert("Progresso salvo neste navegador!");
- }catch(e){if(show)alert("O navegador não permitiu salvar os dados.");}
-}
-
-function newLife() {
- if(!confirm("Começar outra vida? O progresso atual será substituído."))return;
- G=null;localStorage.removeItem("cloverTimeSave");
- $("game").classList.add("hidden");$("creation").classList.remove("hidden");
-}
-
-function event(title,desc,positive=null) {
- if(!G)return;
- G.log.unshift({age:G.age,title,desc,positive});
- if(G.log.length>100)G.log.pop();
-}
-
-function tab(name,btn) {
- currentTab=name;
- document.querySelectorAll('[id^="panel-"]').forEach(el=>el.classList.add("hidden"));
- $("panel-"+name).classList.remove("hidden");
- document.querySelectorAll("#tabs button").forEach(el=>el.classList.toggle("active",el===btn));
- render();
-}
-
-function aliveCheck() {
- if(G.alive)return true;
- alert("A vida deste personagem chegou ao fim. Consulte o histórico ou comece outra vida.");
- return false;
-}
-
-function spend(days) {
- G.days+=days;
- while(G.days>=365){G.days-=365;ageUp(true);}
-}
-
-function activity(type) {
- if(!aliveCheck())return;
- const simple={
-  rest:{days:1,fn:()=>{G.energy=clamp(G.energy+20);G.health=clamp(G.health+3);G.happiness=clamp(G.happiness+2);return "Você descansou e recuperou energia."}},
-  appearance:{days:3,fn:()=>{if(G.money<10)return "Você não tem moedas suficientes para cuidar da aparência.";G.money-=10;G.looks=clamp(G.looks+4);return "Você investiu em sua aparência e melhorou seu visual."}},
-  study:{days:7,fn:()=>{G.intelligence=clamp(G.intelligence+2);G.schoolLevel+=1;return "Você estudou durante uma semana. Seu conhecimento aumentou."}},
-  train:{days:3,fn:()=>{if(G.energy<15)return "Você está cansado demais para treinar. Descanse primeiro.";G.energy-=15;G.strength=clamp(G.strength+3);G.health=clamp(G.health+1);G.stats.training++;return "Treinamento concluído. Sua força aumentou."}},
-  meditate:{days:2,fn:()=>{G.control=clamp(G.control+3);G.mana=clamp(G.mana+8,0,150);return "Sua concentração melhorou e sua mana foi recuperada."}},
-  hobby:{days:2,fn:()=>{G.happiness=clamp(G.happiness+8);return "Você dedicou tempo a algo de que gosta."}},
-  health:{days:2,fn:()=>{if(G.money>=15){G.money-=15;G.health=clamp(G.health+15);return "Você recebeu cuidados de saúde."}G.health=clamp(G.health+4);return "Você descansou e cuidou da saúde sem gastar moedas."}},
-  volunteer:{days:4,fn:()=>{G.rep+=3;G.happiness=clamp(G.happiness+4);return "Você ajudou pessoas e ganhou reconhecimento."}},
-  magictrain:{days:7,fn:()=>{if(G.age<7)return "Você ainda é muito jovem para um treinamento mágico intenso.";if(G.energy<20)return "Sua energia está baixa. Descanse antes.";G.energy-=20;G.magicPower=clamp(G.magicPower+4);G.control=clamp(G.control+2);G.mana=clamp(G.mana+5,0,150);G.stats.training++;return "Uma semana de treino mágico aumentou seu poder e controle."}},
-  grimoire:{days:5,fn:()=>{if(G.age<15)return "O grimório normalmente é recebido aos 15 anos.";if(!G.grimoire)return "Você ainda não recebeu seu grimório.";G.intelligence=clamp(G.intelligence+2);G.spellLevel++;unlockSpell();return "Você estudou seu grimório e avançou no domínio de seus feitiços."}},
-  spelltest:{days:1,fn:()=>{if(!G.grimoire)return "Você precisa receber um grimório primeiro.";if(G.mana<8)return "Mana insuficiente.";G.mana-=8;G.control=clamp(G.control+1);G.rep+=chance(25)?1:0;return "Você testou um feitiço de "+G.magic+". O controle mágico melhorou."}},
-  tournament:{days:5,fn:()=>{if(G.age<15)return "Você precisa ter pelo menos 15 anos.";if(G.magicPower<25)return "Treine mais sua magia antes de competir.";G.stats.duels++;if(chance(clamp(25+G.magicPower/2+G.luck/5,10,85))){G.rep+=12;G.money+=100;G.magicPower=clamp(G.magicPower+3);return "Vitória no torneio! Você ganhou 100 moedas e reconhecimento."}G.health=clamp(G.health-8);return "Você perdeu o torneio, mas aprendeu com o adversário."}},
-  school:{days:7,fn:()=>{if(G.age<5)return "Você ainda não tem idade escolar.";G.schoolLevel++;G.intelligence=clamp(G.intelligence+3);G.happiness=clamp(G.happiness-1);return "Você frequentou as aulas por uma semana e aprendeu coisas novas."}},
-  exam:{days:1,fn:()=>{if(G.age<12)return "Você ainda é muito jovem para esse exame.";let score=G.intelligence+G.schoolLevel+rand(30);if(score>=50){G.examPassed=true;G.rep+=5;return "Você passou no exame e ganhou reconhecimento."}return "Você não passou. Estude mais antes de tentar novamente."}},
-  family:{days:2,fn:()=>{G.familyBond=clamp(G.familyBond+8);G.happiness=clamp(G.happiness+5);return "Você passou tempo com a família e fortaleceu seus vínculos."}},
-  friend:{days:3,fn:()=>{G.friends++;G.happiness=clamp(G.happiness+6);return "Você conheceu alguém. Seu círculo social cresceu."}},
-  date:{days:3,fn:()=>{if(G.age<16)return "Você precisa ter pelo menos 16 anos.";if(G.happiness<20)return "Cuide de si primeiro e tente novamente.";G.relationship=G.relationship||pick(["Aventureiro(a)","Estudioso(a)","Mago(a)","Curandeiro(a)"]);G.happiness=clamp(G.happiness+8);return "Você conheceu "+G.relationship+". Um novo vínculo pode surgir."}},
-  rival:{days:3,fn:()=>{if(G.age<10)return "Você ainda é muito jovem para esse tipo de desafio.";G.stats.duels++;if(G.magicPower+G.strength>50+rand(50)){G.rep+=5;return "Você superou seu rival e ganhou respeito."}G.health=clamp(G.health-5);return "Seu rival levou a melhor. Você precisa treinar mais."}},
-  reputation:{days:5,fn:()=>{G.rep+=5;G.money+=20;return "Você participou de atividades públicas e aumentou sua reputação."}}
+function createPlayer(name,gender,kingdom){
+ return {
+  name,gender,kingdom,age:0,money:rand(10,80),health:100,happiness:90,
+  mana:0,stamina:100,intelligence:rand(1,8),strength:rand(1,8),
+  reputation:0,education:0,magicSkill:0,training:0,relationships:rand(45,80),
+  alive:true,hasGrimoire:false,affinity:null,attacks:[],rank:"Civil",
+  blessing:Math.random()<.04,origin:pick(["Família comum","Família de artesãos","Família mercante","Família nobre menor"]),
+  class:null,race:"Humano",demonWorld:false,job:null,year:0,
+  achievements:[],friends:0,quests:0,inventory:[],log:[],usedThisYear:{},
+  lastEvent:"Nasceu no "+kingdom+"."
  };
- const item=simple[type];
- if(!item)return;
- const msg=item.fn();
- spend(item.days);
- event("Atividade concluída",msg,!/não |insuficiente|perdeu|não passou|precisa|jovem|cansado/i.test(msg));
- render();saveGame(false);
 }
 
-function ageUp(automatic=false) {
- if(!G||!G.alive)return;
- G.age++;G.ageYear++;
- G.health=clamp(G.health+(G.health<40?2:-1));
- G.happiness=clamp(G.happiness-1);
- G.energy=clamp(G.energy+15);
- if(G.job)G.money+=G.job.pay*30;
- if(G.age===5)event("Primeiros estudos","Você está começando a compreender o mundo ao seu redor.");
- if(G.age===10)event("Novas oportunidades","Você já pode procurar alguns trabalhos simples. Estudar continua sendo importante.");
- if(G.age===12)event("Novas responsabilidades","Sua vida escolar fica mais exigente. Prepare-se para exames e decisões.");
- if(G.age===15){
-  G.grimoire=true;
-  G.mana=clamp(G.mana+20,0,150);
-  unlockSpell();
-  event("Cerimônia do grimório","Você completou 15 anos e recebeu seu grimório. Sua jornada mágica começa de verdade.",true);
- }
- if(G.age===18)event("Maioridade","Você alcançou a maioridade. Novas carreiras, missões e responsabilidades estão disponíveis.");
- if(G.age===21)event("A vida adulta","Suas escolhas começam a definir sua reputação e seu futuro.");
- if(G.age%5===0&&G.age>0)event("Marco de vida","Você completou "+G.age+" anos. Suas habilidades e relações refletem as escolhas que fez.");
- if(G.age>=10&&G.familyAlive.father&&chance(1.2)){
-  G.familyAlive.father=false;G.happiness=clamp(G.happiness-20);G.familyBond=clamp(G.familyBond-15);
-  event("Notícia familiar","Seu pai faleceu. A perda afetou profundamente sua família.",false);
- }
- if(G.age>=10&&G.familyAlive.mother&&chance(1)){
-  G.familyAlive.mother=false;G.happiness=clamp(G.happiness-20);G.familyBond=clamp(G.familyBond-15);
-  event("Notícia familiar","Sua mãe faleceu. Você precisará de tempo para lidar com essa perda.",false);
- }
- if(chance(20)){
-  const ev=pick([
-   ["Oportunidade inesperada","Um mentor ofereceu ajuda para seus estudos.",true,()=>G.intelligence=clamp(G.intelligence+3)],
-   ["Dia difícil","Uma sequência de problemas afetou seu humor.",false,()=>G.happiness=clamp(G.happiness-10)],
-   ["Pequena descoberta","Você encontrou moedas esquecidas em um velho baú.",true,()=>G.money+=30],
-   ["Treino produtivo","Você teve um avanço no controle de sua mana.",true,()=>G.control=clamp(G.control+3)],
-   ["Reconhecimento","Alguém comentou sobre seus feitos recentes.",true,()=>G.rep+=3],
-   ["Cansaço acumulado","O excesso de atividades prejudicou sua saúde.",false,()=>G.health=clamp(G.health-7)],
-   ["Amizade inesperada","Você conheceu alguém que pode ajudar no futuro.",true,()=>G.friends++],
-   ["Boato antigo","Você ouviu uma história sobre ruínas esquecidas.",true,()=>G.clues++]
-  ]);
-  ev[3]();event(ev[0],ev[1],ev[2]);
- }
- if(G.age>=60&&chance(5)){
-  G.health=clamp(G.health-15);event("Saúde na maturidade","Sua idade começa a pesar. É importante cuidar melhor da saúde.",false);
- }
- if(G.health<=0){
-  G.health=0;G.alive=false;G.ending="Sua jornada terminou aos "+G.age+" anos.";
-  event("Fim da jornada","Sua vida chegou ao fim. Suas ações e descobertas ficam registradas na história.",false);
- }
- render();saveGame(false);
- if(!automatic&&G.alive){
-  const latest=G.log[0];
-  alert("IDADE: "+G.age+" ANOS\n\n"+(latest?latest.title+": "+latest.desc:"Um novo ano começou."));
- }
+function startLife(){
+ const name=$("playername").value.trim();
+ if(!name){showToast("✍️","Falta um nome","Digite o nome do personagem para continuar.");return;}
+ P=createPlayer(name,$("gender").value,$("kingdom").value);
+ $("loading").classList.add("hidden");
+ $("creation").classList.add("hidden");
+ $("game").classList.remove("hidden");
+ $("nav").classList.remove("hidden");
+ addLog("👶 "+P.name+" nasceu no "+P.kingdom+".");
+ addLog("🍀 Origem familiar: "+P.origin+".");
+ if(P.blessing)addLog("🌟 Uma bênção misteriosa acompanha seu nascimento.");
+ render();
+ showToast("👶","Uma nova vida","A história de "+P.name+" começou. Até os 5 anos, só é possível acompanhar o crescimento.");
 }
 
-function unlockSpell() {
- if(!G||!G.grimoire)return;
- const count=Math.min(ATTACKS.length,1+Math.floor(G.spellLevel/2)+Math.floor(G.magicPower/30));
- for(let i=0;i<count;i++){
-  const spell=G.magic+" — "+ATTACKS[i];
-  if(!G.spells.includes(spell))G.spells.push(spell);
+function toggleSound(){
+ soundOn=!soundOn;
+ $("soundbtn").textContent=soundOn?"🔊":"🔇";
+ if(soundOn)playTone(500,.08,"sine");
+}
+function playTone(freq,duration=.15,type="sine"){
+ if(!soundOn)return;
+ try{
+  audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==="suspended")audioCtx.resume();
+  const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+  o.type=type;o.frequency.setValueAtTime(freq,audioCtx.currentTime);
+  o.frequency.exponentialRampToValueAtTime(Math.max(40,freq*.55),audioCtx.currentTime+duration);
+  g.gain.setValueAtTime(.0001,audioCtx.currentTime);
+  g.gain.exponentialRampToValueAtTime(.12,audioCtx.currentTime+.02);
+  g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+duration);
+  o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+duration+.02);
+ }catch(e){}
+}
+function magicSound(){playTone(520,.22,"triangle");setTimeout(()=>playTone(760,.2,"sine"),100);setTimeout(()=>playTone(300,.25,"sawtooth"),190);$("magicfx").style.display="block";setTimeout(()=>$("magicfx").style.display="none",450);}
+function showToast(img,title,text){
+ $("toastimg").textContent=img;$("toasttitle").textContent=title;$("toasttext").textContent=text;
+ $("toast").style.display="block";clearTimeout(toastTimer);
+ toastTimer=setTimeout(()=>$("toast").style.display="none",4000);
+}
+function addLog(text){
+ if(!P)return;P.log.unshift("Ano "+P.age+": "+text);
+ if(P.log.length>60)P.log.length=60;
+}
+function adjust(key,amount,min=0,max=100){P[key]=clamp(P[key]+amount,min,max);}
+function canAct(age=5){return P&&P.alive&&P.age>=age&&!busy;}
+function actionOnce(key){
+ if(P.usedThisYear[key]){showToast("⏳","Você já fez isso","Essa atividade só pode ser feita uma vez por ano.");return false;}
+ P.usedThisYear[key]=true;return true;
+}
+function act(img,title,description,fn,requiredAge=5){
+ if(!canAct(requiredAge)){showToast("🔒","Ainda não","Essa atividade estará disponível quando você tiver idade suficiente.");return;}
+ if(!actionOnce(title))return;
+ fn();addLog(img+" "+title+": "+description);render();
+ showToast(img,title,description);
+}
+function showSection(id,btn){
+ currentTab=id;
+ if(id==="eventlog")$("eventlog").scrollIntoView({behavior:"smooth",block:"center"});
+ else $(id).scrollIntoView({behavior:"smooth",block:"start"});
+ document.querySelectorAll(".bottomnav button").forEach(b=>b.classList.remove("active"));
+ if(btn)btn.classList.add("active");
+}
+function ageUp(){
+ if(!P||!P.alive||busy)return;
+ busy=true;
+ P.age++;P.year++;P.usedThisYear={};
+ P.health=clamp(P.health+rand(-5,4));P.happiness=clamp(P.happiness+rand(-5,4));
+ P.stamina=100;
+ if(P.age===5)addLog("🎒 Você já tem idade para começar atividades infantis.");
+ if(P.age===15&&!P.hasGrimoire){
+  P.hasGrimoire=true;P.affinity=pick(AFFINITIES);P.mana=rand(20,50);
+  P.attacks=makeAttacks(P.affinity);
+  addLog("📖 Aos 15 anos, recebeu um grimório com afinidade de "+P.affinity+".");
+  showToast("📖","O grimório escolheu você","Sua afinidade é "+P.affinity+". Novos caminhos mágicos foram abertos.");
+  playTone(660,.3,"triangle");
  }
+ if(P.age>=18&&P.rank==="Civil")P.rank="Candidato a Cavaleiro Mágico";
+ if(Math.random()<.28)randomEvent();
+ if(P.health<=0){P.health=1;}
+ render();busy=false;
+ showToast("🎂","Você completou "+P.age+" anos",P.lastEvent||"Mais um ano da sua vida passou.");
 }
-
-function findJobs() {
- if(!aliveCheck())return;
- lastJobOffers=JOBS.filter(j=>G.age>=j.age&&G.intelligence>=j.int);
- if(!lastJobOffers.length){
-  $("jobresult").textContent="Nenhuma vaga adequada por enquanto. Envelheça, estude e desenvolva suas habilidades.";
-  render();return;
- }
- $("jobresult").innerHTML="";
- lastJobOffers.forEach((j,i)=>{
-  const b=document.createElement("button");
-  b.className="btn";b.style.marginTop="7px";b.style.textAlign="left";
-  b.textContent=j.name+" · "+j.pay+" moedas/dia · requisito: "+j.age+" anos";
-  b.onclick=()=>applyJob(i);$("jobresult").appendChild(b);
- });
+function makeAttacks(affinity){
+ const list=ATTACKS[affinity]||DEFAULT_ATTACKS;
+ return list.slice(0,10).map((name,i)=>({name,level:i+1,unlocked:i===0}));
 }
-
-function applyJob(i) {
- const j=lastJobOffers[i];if(!j)return;
- if(G.age<j.age||G.intelligence<j.int){alert("Você não cumpre os requisitos.");return;}
- spend(3);
- const score=G.intelligence+G.rep+G.looks/3+rand(40);
- if(score>=j.int+20){
-  G.job=j;G.rep+=j.rep;event("Emprego conquistado","Você foi contratado como "+j.name+". O trabalho exige tempo e dedicação.",true);
-  $("jobresult").textContent="Você conseguiu a vaga de "+j.name+"!";
- }else{
-  event("Candidatura recusada","Você se candidatou a "+j.name+", mas não foi selecionado. Melhore seus requisitos e tente novamente.",false);
-  $("jobresult").textContent="Você não conseguiu a vaga. Estude e aumente sua reputação.";
- }
- render();saveGame(false);
-}
-
-function workDay() {
- if(!aliveCheck())return;
- if(!G.job){alert("Você precisa procurar uma vaga e conseguir um emprego primeiro.");return;}
- if(G.energy<10){alert("Você está cansado. Descanse antes de trabalhar.");return;}
- G.energy-=10;G.money+=G.job.pay;G.jobExperience++;G.stats.workDays++;
- spend(1);
- if(chance(10)){G.rep+=1;event("Bom desempenho","Seu trabalho foi reconhecido pelos superiores.",true);}
- render();saveGame(false);
-}
-
-function tryKnights() {
- if(!aliveCheck())return;
- if(G.age<15){alert("Você precisa ter pelo menos 15 anos.");return;}
- if(!G.grimoire){alert("Você precisa de um grimório.");return;}
- if(G.magicPower<20){alert("Treine sua magia até alcançar pelo menos 20 de poder.");return;}
- spend(7);
- let score=G.magicPower+G.control+G.strength+G.rep+rand(35);
- if(score>=75){
-  G.knightOrder=pick(KNIGHTS);G.knightRank=Math.max(1,G.knightRank);
-  G.rep+=10;G.money+=100;
-  event("Ingresso nos Cavaleiros Mágicos","Você foi aceito no esquadrão "+G.knightOrder+". Sua carreira mágica começou.",true);
-  alert("APROVADO!\nVocê entrou para "+G.knightOrder+".");
- }else{
-  G.rep+=1;event("Exame dos Cavaleiros","Você participou da seleção, mas ainda não demonstrou potencial suficiente.",false);
-  alert("Você não foi aprovado desta vez. Treine e tente novamente.");
- }
- render();saveGame(false);
-}
-
-function promote() {
- if(!G.knightOrder){alert("Você precisa entrar para um esquadrão primeiro.");return;}
- if(G.knightRank>=4){alert("Você já alcançou a patente máxima disponível nesta versão.");return;}
- const need=30+G.knightRank*20;
- if(G.rep<need||G.magicPower<25+G.knightRank*10){alert("Requisitos: reputação "+need+" e poder mágico "+(25+G.knightRank*10)+".");return;}
- spend(30);G.knightRank++;G.rep+=10;G.money+=150;
- event("Promoção","Você subiu de patente em "+G.knightOrder+". Seus feitos começam a chamar atenção.",true);
- render();saveGame(false);
-}
-
-function pursueKing() {
- if(G.age<18){alert("Você precisa alcançar a maioridade.");return;}
- const score=G.rep+G.magicPower+G.control+G.intelligence+G.knightRank*20;
- if(score<180){alert("Seu nome ainda não tem influência suficiente. Aumente sua reputação, seu poder e sua experiência.");return;}
- if(!G.knightOrder){alert("Entre para os Cavaleiros Mágicos antes de tentar conquistar o título.");return;}
- spend(30);
- if(score>=260&&G.knightRank>=3){
-  if(!G.titles.includes("Candidato a Rei Mago"))G.titles.push("Candidato a Rei Mago");
-  G.rep+=20;event("Desafio supremo","Você foi reconhecido como candidato ao título de Rei Mago. A disputa ainda não terminou.",true);
-  alert("VOCÊ SE TORNOU UM CANDIDATO AO TÍTULO DE REI MAGO!");
- }else{
-  G.rep+=5;event("Ambição real","Você declarou seu objetivo de se tornar Rei Mago, mas ainda precisa provar seu valor.",false);
- }
- render();saveGame(false);
-}
-
-function explore(type) {
- if(!aliveCheck())return;
- const costs={forest:3,ruins:10,dungeon:7,market:1,library:3,underworld:5};
- const cost=costs[type]||3;
- if(G.age<7&&type!=="market"){alert("Você ainda é muito jovem para explorar esse local.");return;}
- if(type==="underworld"&&G.clues<3){alert("Você precisa de pelo menos 3 pistas sobre o Submundo. Explore ruínas e bibliotecas primeiro.");return;}
- if(type==="underworld"&&G.magicPower<35){alert("Sua magia ainda é fraca demais para investigar a passagem.");return;}
- spend(cost);G.stats.explorations++;
- let title="",desc="",positive=true;
- if(type==="market"){
-  if(G.money>=20&&chance(55)){G.money-=20;G.inventory.push("Poção de mana");desc="Você comprou uma poção de mana por 20 moedas.";title="Compra no mercado";}
-  else{G.money+=10;desc="Você encontrou um pequeno trabalho no mercado e ganhou 10 moedas.";title="Mercado do reino";}
- }else if(type==="forest"){
-  if(chance(35)){G.inventory.push("Flor mágica");G.mana=clamp(G.mana+10,0,150);title="Flor rara";desc="Você encontrou uma flor mágica e recuperou um pouco de mana.";}
-  else if(chance(50)){G.clues++;title="Inscrição na floresta";desc="Você encontrou uma inscrição antiga que pode ajudar a entender o passado.";}
-  else{G.health=clamp(G.health-5);title="Encontro perigoso";desc="Uma criatura hostil surpreendeu você. Você conseguiu escapar, mas ficou ferido.";positive=false;}
- }else if(type==="ruins"){
-  if(chance(45)){G.clues++;G.intelligence=clamp(G.intelligence+2);G.inventory.push("Fragmento rúnico");title="Segredo das ruínas";desc="Você decifrou parte de uma inscrição histórica e encontrou um fragmento rúnico.";}
-  else if(chance(30)){G.money+=80;title="Tesouro antigo";desc="Você encontrou um pequeno tesouro entre as pedras antigas.";}
-  else{G.health=clamp(G.health-12);title="Armadilha antiga";desc="Uma armadilha feriu você. As ruínas escondem perigos reais.";positive=false;}
- }else if(type==="dungeon"){
-  if(G.magicPower<20){G.health=clamp(G.health-15);title="Masmorra perigosa";desc="Sua magia não foi suficiente para enfrentar os perigos. Você escapou por pouco.";positive=false;}
-  else if(chance(60)){G.rep+=8;G.money+=100;G.magicPower=clamp(G.magicPower+3);title="Vitória na masmorra";desc="Você derrotou uma criatura e encontrou um tesouro.";}
-  else{G.health=clamp(G.health-15);title="Combate difícil";desc="Você precisou recuar após um combate difícil.";positive=false;}
- }else if(type==="library"){
-  G.intelligence=clamp(G.intelligence+3);G.clues++;
-  title="Conhecimento perdido";desc="Você encontrou registros antigos sobre reinos, grimórios e o Submundo.";
- }else if(type==="underworld"){
-  G.underworldProgress++;
-  if(G.underworldProgress>=3){
-   G.inventory.push("Selo do Submundo");G.rep+=15;title="O selo demoníaco";desc="Você encontrou um selo ligado ao Submundo. A passagem continua bloqueada, mas agora você conhece parte do segredo.";
-  }else{G.health=clamp(G.health-8);title="Energia proibida";desc="Você chegou perto da passagem e sentiu uma presença poderosa. Ainda faltam pistas.";positive=false;}
- }
- G.happiness=clamp(G.happiness+2);
- event(title,desc,positive);render();saveGame(false);
- alert(title+"\n\n"+desc);
-}
-
-function render() {
- if(!G)return;
- $("charname").textContent=G.name;
- $("age").textContent=G.age;$("year").textContent="Ano "+(G.age+1);
- $("money").textContent=fmt(G.money);$("rep").textContent=fmt(G.rep);
- const stages=G.age<5?"PRIMEIRA INFÂNCIA":G.age<12?"INFÂNCIA":G.age<18?"ADOLESCÊNCIA":G.age<40?"VIDA ADULTA":G.age<60?"MATURIDADE":"VELHICE";
- $("stage").textContent=stages;
- $("bio").textContent=G.kingdom+" · "+G.race+" · "+G.familyOrigin;
- const faces=G.gender==="Feminino"?["👧","🧒","👩","👵"]:G.gender==="Outro"?["🧒","🧑","🧙","🧓"]:["👦","🧑","🧙","🧓"];
- const fi=G.age<12?0:G.age<18?1:G.age<60?2:3;
- $("avatar").textContent=faces[fi];
- $("tags").innerHTML="";
- [G.className,G.blessed?"Abençoado":"Não abençoado",G.job?G.job.name:"Sem emprego"].forEach(t=>{const s=document.createElement("span");s.className="tag";s.textContent=t;$("tags").appendChild(s);});
- const statDefs=[
-  ["Saúde",G.health,"red"],["Felicidade",G.happiness,"gold"],["Aparência",G.looks,""],
-  ["Inteligência",G.intelligence,""],["Força",G.strength,"green"],["Sorte",G.luck,"gold"],
-  ["Energia",G.energy,"green"],["Poder mágico",G.magicPower,""],["Controle mágico",G.control,""],
-  ["Mana",G.mana/1.5,""]
+function randomEvent(){
+ const events=[
+  ()=>{adjust("happiness",8);P.lastEvent="Sua família passou um dia especial com você.";addLog("🏡 Sua família passou um dia especial com você.");},
+  ()=>{adjust("health",-8);P.lastEvent="Você ficou doente e precisou descansar.";addLog("🤒 Você ficou doente e precisou descansar.");},
+  ()=>{adjust("relationships",7);P.friends++;P.lastEvent="Você conheceu alguém que pode virar um grande amigo.";addLog("🤝 Você fez uma nova amizade.");},
+  ()=>{P.money+=rand(5,35);P.lastEvent="Sua família recebeu uma pequena quantia de dinheiro.";addLog("🪙 Sua família recebeu algum dinheiro.");},
+  ()=>{adjust("happiness",-7);P.lastEvent="Você teve um ano difícil, mas pode recomeçar.";addLog("🌧️ Você teve um ano difícil.");}
  ];
- $("stats").innerHTML=statDefs.map(([n,v,c])=>`<div class="stat"><div class="statline"><span>${n}</span><b>${Math.round(v)}${n==="Mana"?" / 150":"/100"}</b></div><div class="track"><div class="fill ${c}" style="width:${clamp(v)}%"></div></div></div>`).join("");
- $("healthstatus").textContent=G.health>70?"Estável":G.health>35?"Atenção":"Crítico";
- $("magicinfo").innerHTML=`<div class="grid"><div><div class="small">AFINIDADE</div><b>${G.magic}</b></div><div><div class="small">GRIMÓRIO</div><b>${G.grimoire?"Desbloqueado":"Disponível aos 15"}</b></div><div><div class="small">MANA</div><b>${Math.round(G.mana)} / 150</b></div><div><div class="small">BÊNÇÃO</div><b>${G.blessed?"Abençoado":"Comum"}</b></div></div><p class="muted" style="font-size:12px">Seu potencial depende da afinidade, raça, classe, treino, controle e bênção.</p>`;
- $("spells").innerHTML=G.spells.length?G.spells.map(s=>`<span class="tag magic">${s}</span>`).join(""):`<p class="muted" style="font-size:12px">Seus feitiços serão desbloqueados após receber o grimório e treinar.</p>`;
- $("affinities").innerHTML=MAGIC.map(m=>`<span class="tag ${m===G.magic?"magic":""}">${m}</span>`).join("");
- $("schoolinfo").innerHTML=`Idade escolar: ${G.age>=5?"disponível":"a partir dos 5 anos"}<br>Semanas de estudo: ${G.schoolLevel}<br>Inteligência: ${Math.round(G.intelligence)}<br>Exame aprovado: ${G.examPassed?"Sim":"Não"}`;
- $("jobs").innerHTML=G.job?`<div class="notice">Emprego atual: <b>${G.job.name}</b><br>Salário: ${G.job.pay} moedas por dia<br>Experiência: ${G.jobExperience} dias trabalhados</div>`:`<p class="muted" style="font-size:12px">Você não tem emprego. Procure vagas e apresente sua candidatura.</p>`;
- $("knights").innerHTML=G.knightOrder?`<div class="notice"><b>${G.knightOrder}</b><br>Patente: ${["Nenhuma","Membro","Veterano","Vice-capitão","Capitão"][G.knightRank]||"Membro"}<br>Reputação: ${G.rep}</div>`:`<p class="muted" style="font-size:12px">Nenhum esquadrão. Treine e participe da seleção dos Cavaleiros Mágicos.</p>`;
- $("wizardking").textContent=G.titles.includes("Candidato a Rei Mago")?"Você é reconhecido como candidato. O título definitivo ainda precisa ser conquistado.":"O caminho exige reputação, poder mágico, patente e grandes feitos.";
- $("inventory").innerHTML=G.inventory.length?G.inventory.map(it=>`<span class="tag">${it}</span>`).join(""):`<span class="muted" style="font-size:12px">Seu inventário está vazio.</span>`;
- $("underworldinfo").textContent="Pistas descobertas: "+G.clues+" · Investigações: "+G.underworldProgress;
- $("familyinfo").innerHTML=`Pai: ${G.familyAlive.father?"Vivo":"Falecido"}<br>Mãe: ${G.familyAlive.mother?"Viva":"Falecida"}<br>Vínculo familiar: ${G.familyBond}/100`;
- $("socialinfo").innerHTML=`Amizades: ${G.friends}<br>Relacionamento: ${G.relationship||"Nenhum"}<br>Casado: ${G.married?"Sim":"Não"}<br>Filhos: ${G.children}`;
- $("summary").innerHTML=`<p>Nome: <b>${G.name}</b><br>Idade: <b>${G.age}</b><br>Reino: <b>${G.kingdom}</b><br>Raça: <b>${G.race}</b><br>Magia: <b>${G.magic}</b><br>Explorações: <b>${G.stats.explorations}</b><br>Treinos: <b>${G.stats.training}</b><br>Dias trabalhados: <b>${G.stats.workDays}</b><br>Duelos: <b>${G.stats.duels}</b><br>Relíquias/pistas: <b>${G.clues}</b><br>Estado: <b>${G.alive?"Vivo":"Falecido"}</b></p>`;
- $("log").innerHTML=G.log.slice(0,35).map(e=>`<div class="event ${e.positive===true?"positive":e.positive===false?"negative":""}"><div class="year">IDADE ${e.age} · ${e.title}</div>${e.desc}</div>`).join("")||"<p class='muted'>Sua história começa aqui.</p>";
+ pick(events)();
 }
-
-for(let i=0;i<26;i++){
- const p=document.createElement("div");p.className="magic-particle";
- p.style.left=rand(100)+"%";p.style.top=rand(100)+"%";
- p.style.animationDelay=(Math.random()*4)+"s";
- p.style.color=pick(["#c4b5fd","#f0abfc","#7dd3fc","#fcd34d"]);
- $("particles").appendChild(p);
-}
-let progress=0;
-const loadingTimer=setInterval(()=>{
- progress=Math.min(100,progress+rand(15)+7);
- $("loadfill").style.width=progress+"%";
- if(progress>25)$("loadtext").textContent="CARREGANDO OS REINOS...";
- if(progress>60)$("loadtext").textContent="ORGANIZANDO A MANA...";
- if(progress>=100){
-  clearInterval(loadingTimer);
-  setTimeout(()=>{
-   $("loading").style.opacity="0";
-   setTimeout(()=>{
-    $("loading").style.display="none";$("app").style.display="block";
-    try{
-     if(localStorage.getItem("cloverTimeSave")){
-      $("creation").classList.remove("hidden");
-     }else $("creation").classList.remove("hidden");
-    }catch(e){$("creation").classList.remove("hidden");}
-   },700);
-  },250);
- }
-},180);
 </script>
 </body>
 </html>
