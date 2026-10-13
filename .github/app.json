@@ -1,0 +1,12 @@
+
+{
+  "appName": "Clover Time",
+  "appId": "com.clovertime.game",
+  "versionName": "1.0.0",
+  "versionCode": 1,
+  "apkName": "Clover-Time",
+  "url": "COLOQUE_AQUI_O_LINK_DO_SEU_JOGO",
+  "orientation": "portrait",
+  "backgroundColor": "#050505",
+  "splashColor": "#050505"
+}
