@@ -103,9 +103,9 @@ html{background:var(--bg)}body{background:linear-gradient(180deg,#e7eee7 0,#f4f6
 </head>
 <body>
 <div id="loading"><div class="loadbox loading-minimal"><div class="brandtitle">CLOVER <span>TIME</span></div><div class="loadbar"><i id="loadfill"></i></div></div></div>
-<div id="creation" class="hidden"><div class="loadbox"><div class="brandtitle">CLOVER <span>TIME</span></div><div class="separator"></div><h2>Onde sua história começa?</h2><p class="muted small">Escolha somente o básico. O mundo definirá o resto por você.</p><label class="formlabel" for="newname">Nome</label><input id="newname" class="forminput" maxlength="22" autocomplete="off" placeholder="Nome do personagem"><label class="formlabel" for="newgender">Gênero</label><select id="newgender" class="forminput"><option value="Masculino">Masculino</option><option value="Feminino">Feminino</option><option value="Não especificado">Não especificado</option></select><label class="formlabel" for="newkingdom">Reino de nascimento</label><select id="newkingdom" class="forminput"><option>Reino Clover</option><option>Reino Heart</option><option>Reino Diamond</option><option>Reino Spade</option></select><button id="beginbtn" class="primary" style="width:100%;margin-top:16px">🍀 Começar minha vida</button><p class="tiny" style="margin-top:14px">Raça, classe, afinidade, bênçãos e destino não podem ser escolhidos aqui.</p></div></div>
+<div id="creation" class="hidden"><div class="loadbox"><div class="brandtitle">🍀 CLOVER <span>TIME</span></div><div class="separator"></div><h2>Onde sua história começa?</h2><p class="muted small">Escolha somente o básico. O mundo definirá o resto por você.</p><label class="formlabel" for="newname">Nome</label><input id="newname" class="forminput" maxlength="22" autocomplete="off" placeholder="Nome do personagem"><label class="formlabel" for="newgender">Gênero</label><select id="newgender" class="forminput"><option value="Masculino">Masculino</option><option value="Feminino">Feminino</option><option value="Não especificado">Não especificado</option></select><label class="formlabel" for="newkingdom">Reino de nascimento</label><select id="newkingdom" class="forminput"><option>Reino Clover</option><option>Reino Heart</option><option>Reino Diamond</option><option>Reino Spade</option></select><button id="beginbtn" class="primary" style="width:100%;margin-top:16px">🍀 Começar minha vida</button><p class="tiny" style="margin-top:14px">Raça, classe, afinidade, bênçãos e destino não podem ser escolhidos aqui.</p></div></div>
 <div id="ending" class="hidden"><div class="loadbox"><div class="orb">📜</div><h1 id="endingtitle">Fim da jornada</h1><p id="endingtext" class="loadsub"></p><button class="primary" onclick="restartGame()" style="width:100%">Começar uma nova vida</button></div></div>
-<header id="header" class="hidden"><div><div class="logo">CLOVER <span>TIME</span></div><div class="tiny" id="headerline">Simulador de vida mágica</div></div><div class="header-right"><button class="iconbtn" id="soundtoggle" title="Som">🔊</button><button class="iconbtn" id="savestate" title="Salvar">💾</button><button class="iconbtn" id="saveSlotsBtn" title="Vidas salvas">📚</button></div></header>
+<header id="header" class="hidden"><div><div class="logo">🍀 CLOVER <span>TIME</span></div><div class="tiny" id="headerline">Simulador de vida mágica</div></div><div class="header-right"><button class="iconbtn" id="soundtoggle" title="Som">🔊</button><button class="iconbtn" id="savestate" title="Salvar">💾</button><button class="iconbtn" id="saveSlotsBtn" title="Vidas salvas">📚</button></div></header>
 <main id="app" class="wrap hidden">
 <section class="card section" id="life"><div class="row"><div class="profile-icon" id="avatar">👶</div><div style="flex:2"><div class="tiny">SUA HISTÓRIA</div><h2 id="displayname" style="margin:2px 0 3px">Nome</h2><div class="small muted" id="identity">0 anos • Reino Clover</div><div id="tags" class="pillrow" style="margin-top:5px"></div></div></div><div class="separator"></div><div class="grid three"><div><div class="tiny">💰 DINHEIRO</div><b id="cash">0</b></div><div><div class="tiny">✨ MANA</div><b id="manav">0</b></div><div><div class="tiny">🎖️ RANK</div><b id="rankv">Civil</b></div></div><div class="separator"></div><div class="grid"><div class="stat"><div class="stathead"><span>❤️ Saúde</span><b id="healthn">100</b></div><div class="bar"><i id="healthbar"></i></div></div><div class="stat"><div class="stathead"><span>😊 Felicidade</span><b id="happyn">90</b></div><div class="bar gold"><i id="happybar"></i></div></div><div class="stat"><div class="stathead"><span>⚡ Energia</span><b id="energyn">100</b></div><div class="bar"><i id="energybar"></i></div></div><div class="stat"><div class="stathead"><span>⭐ Reputação</span><b id="repn">0</b></div><div class="bar purple"><i id="repbar"></i></div></div></div><div class="notice" id="lifesummary">Sua vida começa agora.</div></section>
 <div class="tabs" id="tabs"><button class="active" data-page="overview">🏠 Vida</button><button data-page="activities">🎯 Atividades</button><button data-page="magic">✨ Magia</button><button data-page="career">🛡️ Carreira</button><button data-page="world">🗺️ Mundo</button><button data-page="social">👥 Relações</button><button data-page="familyhub">🏡 Família+</button><button data-page="journal">📜 Diário</button></div>
@@ -117,7 +117,7 @@ html{background:var(--bg)}body{background:linear-gradient(180deg,#e7eee7 0,#f4f6
 <section id="page-social" class="page section hidden"><div class="card"><h2>👥 Família e amizades</h2><div id="socialpanel"></div><div class="action-list" id="socialactions"></div></div><div class="card"><h2>🩺 Saúde e bem-estar</h2><div id="wellbeingpanel"></div><div class="action-list" id="wellbeingactions"></div></div></section>
 
 <section id="page-familyhub" class="page section hidden">
- <div class="card"><div class="split"><h2> Sua família</h2><span class="badge green" id="family-count">0 membros</span></div><p class="small muted">Cada pessoa tem personalidade, saúde e vínculo próprios. Converse, ajude e construa sua história com elas.</p><div id="family-list" class="family-grid"></div></div>
+ <div class="card"><div class="split"><h2>🏡 Sua família</h2><span class="badge green" id="family-count">0 membros</span></div><p class="small muted">Cada pessoa tem personalidade, saúde e vínculo próprios. Converse, ajude e construa sua história com elas.</p><div id="family-list" class="family-grid"></div></div>
  <div class="card"><div class="split"><h2>🔮 Treinamento mágico</h2><span class="badge" id="magic-training-count">0/3 este ano</span></div><p class="small muted">Treine o controle da mana. Em cada tentativa, toque no botão verde correto. Errar custa energia e pode causar um pequeno contratempo.</p><div id="magic-puzzle-host"></div><button class="primary" id="start-magic-puzzle">✨ Iniciar treino de precisão</button></div>
  <div class="card"><div class="split"><h2>💪 Rotina física</h2><span class="badge" id="physical-training-count">0/3 este ano</span></div><p class="small muted">Treinos mais pesados dão mais força, mas gastam mais energia e aumentam o risco de lesão.</p><div class="training-modes" id="training-modes"><button data-training="leve">🟢 Leve</button><button data-training="medio">🟡 Médio</button><button data-training="pesado">🔴 Pesado</button></div><div class="small muted" id="training-description">Escolha a intensidade e faça seu treino.</div><button class="primary" id="do-physical-training">🏋️ Fazer treino</button></div>
  <div class="card"><h2>💞 Relacionamento e família</h2><div id="relationship-panel"></div><div class="action-list" id="relationship-actions"></div></div>
@@ -126,7 +126,7 @@ html{background:var(--bg)}body{background:linear-gradient(180deg,#e7eee7 0,#f4f6
  <div class="card"><div class="split"><h2>🌩️ Crises do reino</h2><span class="badge" id="crisis-status">Sem crise ativa</span></div><div id="crisis-panel"></div><div class="action-list" id="crisis-actions"></div></div>
  <div class="card"><h2>🧭 Rotinas e atividades extras</h2><p class="small muted">Ações adicionais para variar sua vida. Cada atividade importante tem limite anual para evitar spam.</p><div id="routine-list" class="routine-grid"></div></div>
 </section>
-<section id="page-journal" class="page section hidden"><div class="card"><div class="split"><h2>Diário da vida</h2><button id="exportlog" class="iconbtn">📤 Exportar</button></div><div id="journalentries"></div></div><div class="card"><h2>📈 Resumo da jornada</h2><div id="lifesummarydetails"></div></div><div class="card"><h2>💾 Dados locais</h2><p class="small muted">O jogo salva neste navegador. Limpar os dados do site pode apagar o progresso.</p><div class="grid"><button id="savebtn">💾 Salvar agora</button><button id="resetbtn" class="danger">🗑️ Apagar vida</button></div></div></section>
+<section id="page-journal" class="page section hidden"><div class="card"><div class="split"><h2>📜 Diário da vida</h2><button id="exportlog" class="iconbtn">📤 Exportar</button></div><div id="journalentries"></div></div><div class="card"><h2>📈 Resumo da jornada</h2><div id="lifesummarydetails"></div></div><div class="card"><h2>💾 Dados locais</h2><p class="small muted">O jogo salva neste navegador. Limpar os dados do site pode apagar o progresso.</p><div class="grid"><button id="savebtn">💾 Salvar agora</button><button id="resetbtn" class="danger">🗑️ Apagar vida</button></div></div></section>
 <div class="footer">Clover Time • fan game não oficial • progresso salvo neste dispositivo</div>
 </main>
 <nav id="bottomnav" class="bottomnav hidden"><button data-page="overview"><span>🏠</span>Vida</button><button data-page="career"><span>🎓</span>Carreira</button><button data-page="social"><span>👥</span>Relações</button><button id="bottomage" class="age-nav"><span>＋</span>IDADE</button><button data-page="activities"><span>☰</span>Ações</button><button data-page="magic"><span>📖</span>Magia</button><button id="bottomstatus"><span>📊</span>Status</button></nav>
@@ -819,4 +819,108 @@ ctInstall();
 wire();loader();
 if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
 
-</script></body></html>
+
+/* CLOVER TIME — EXPANSÃO DE IMERSÃO, ESTRELAS E CORREÇÕES */
+const ctFinalStyle=document.createElement('style');ctFinalStyle.id='ct-final-polish';ctFinalStyle.textContent=`
+.action .emoji{font-size:19px;flex-basis:27px}.profile-icon{flex-shrink:0}.appearance-card{display:grid;grid-template-columns:82px 1fr;gap:13px;align-items:center}.appearance-portrait{width:82px;height:96px;border-radius:14px;display:grid;place-items:center;font-size:47px;background:linear-gradient(145deg,#2a4b3b,#202032);border:1px solid #47795f}.appearance-line{font-size:12px;color:var(--muted);margin-top:4px}.family-person{min-width:0}.family-portrait{width:48px;height:52px;border-radius:10px;display:grid;place-items:center;font-size:27px;background:linear-gradient(145deg,#2b2b45,#1b1b2b);border:1px solid #44445f;margin-bottom:6px}.squad-rank-row{display:grid;grid-template-columns:30px 1fr auto;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid #303047;font-size:12px}.squad-rank-row:last-child{border-bottom:0}.squad-rank-row.mine{background:#21382d;border-radius:9px;padding:9px;margin:3px -5px;border:1px solid #42775a}.contrib-row{display:flex;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px solid #303047;font-size:12px}.year-event-lead{font-size:13px;line-height:1.6;color:#d9d5ec}.year-processing{opacity:.85}
+#bottomnav:not(.hidden){display:flex!important}#lifeHud[style*="display: block"]{display:block!important}
+@media(max-width:380px){.bottomnav button{font-size:9px}.bottomnav button span{font-size:17px}.appearance-card{grid-template-columns:68px 1fr}.appearance-portrait{width:68px;height:82px;font-size:39px}}
+`;document.head.appendChild(ctFinalStyle);
+
+(function(){
+ const CT_SQUADS_FINAL=['Alvorecer Dourado','Touros Negros','Leões Carmesins','Rosas Azuis','Águias Prateadas','Orcas Púrpuras','Cervos Turquesa','Pavões Coral'];
+ const CT_EXTRA_SPELLS=[
+  {name:'Lança de Mana Estelar',affinity:'Mana',power:1},
+  {name:'Muralha Arcana',affinity:'Defesa',power:2},
+  {name:'Círculo de Restrição',affinity:'Controlo',power:3},
+  {name:'Explosão do Grimório',affinity:'Mana',power:4}
+ ];
+ let ctFinalYearLock=false;
+ function ctSafe(s){return typeof safeText==='function'?safeText(s):String(s).replace(/[&<>"']/g,'');}
+ function ctAppearance(){
+  if(!P)return;
+  P.appearance=P.appearance||{};
+  const a=P.appearance;
+  const skin=a.skin||'morena clara';
+  const hair=a.hair||pick(['cabelo preto ondulado','cabelo castanho curto','cabelo prateado','cabelo preto longo','cabelo castanho ondulado']);
+  const eyes=a.eyes||pick(['olhos cinzentos','olhos verdes','olhos castanhos','olhos azuis']);
+  const build=a.build||pick(['porte ágil','porte atlético','porte esguio']);
+  const face=a.face||pick(['rosto oval','rosto marcado','rosto delicado','rosto alongado']);
+  Object.assign(a,{skin,hair,eyes,build,face});
+  let host=document.getElementById('ct-appearance-card');
+  if(!host){host=document.createElement('div');host.id='ct-appearance-card';host.className='card';const overview=document.getElementById('page-overview');if(overview)overview.insertBefore(host,overview.firstChild);}
+  host.innerHTML='<div class="split"><h2>Aparência do personagem</h2><span class="badge">Idade '+P.age+'</span></div><div class="appearance-card"><div class="appearance-portrait">'+(P.gender==='Feminino'?(P.age<13?'👧':P.age<20?'👩‍🎓':'🧙‍♀️'):(P.age<13?'🧒':P.age<20?'🧑‍🎓':'🧙'))+'</div><div><b>'+ctSafe(P.name)+'</b><div class="appearance-line">'+ctSafe(a.face)+' · pele '+ctSafe(a.skin)+'</div><div class="appearance-line">'+ctSafe(a.hair)+' · '+ctSafe(a.eyes)+'</div><div class="appearance-line">'+ctSafe(a.build)+' · '+ctSafe(P.race||'Humano')+'</div><button id="ct-refresh-look" style="margin-top:9px;padding:8px 10px;font-size:11px">Alterar estilo visual</button></div></div>';
+  const b=document.getElementById('ct-refresh-look');if(b)b.onclick=()=>{const skins=['clara','morena clara','morena','retinta'];a.skin=pick(skins);a.hair=pick(['cabelo preto ondulado','cabelo castanho curto','cabelo prateado','cabelo preto longo','cabelo castanho ondulado','cabelo ruivo encaracolado']);a.eyes=pick(['olhos cinzentos','olhos verdes','olhos castanhos','olhos azuis']);a.build=pick(['porte ágil','porte atlético','porte esguio']);a.face=pick(['rosto oval','rosto marcado','rosto delicado','rosto alongado']);render();saveGame(false);};
+ }
+ function ctStarsEnsure(){
+  if(!P)return;
+  P.squadStars=P.squadStars||{};P.squadContributions=P.squadContributions||{};
+  const seed=(String(P.lifeId||P.name).split('').reduce((a,c)=>a+c.charCodeAt(0),0));
+  CT_SQUADS_FINAL.forEach((s,i)=>{if(typeof P.squadStars[s]!=='number')P.squadStars[s]=25+((seed*(i+3)+i*19)%95);if(!P.squadContributions[s])P.squadContributions[s]={};});
+  if(P.knightOrder&&!P.squadContributions[P.knightOrder][P.name])P.squadContributions[P.knightOrder][P.name]=0;
+ }
+ function ctGiveStars(amount,reason){
+  if(!P)return;
+  ctStarsEnsure();
+  if(!P.knightOrder){notify('Estrelas do Rei Mago','Entre em um esquadrão','Você precisa ser Cavaleiro Mágico para contribuir no ranking.');return;}
+  const n=Math.max(1,Math.floor(amount));P.squadStars[P.knightOrder]=(P.squadStars[P.knightOrder]||0)+n;
+  const c=P.squadContributions[P.knightOrder];c[P.name]=(c[P.name]||0)+n;P.personalStars=(P.personalStars||0)+n;
+  P.lastEvent='Você conquistou '+n+' estrela(s) para '+P.knightOrder+' por '+reason+'.';
+  if(typeof log==='function')log('Estrelas',P.lastEvent);
+  if(typeof render==='function')render();if(typeof saveGame==='function')saveGame(false);
+  if(typeof notify==='function')notify('Estrelas do Rei Mago','+'+n+' estrelas',reason+' • Total do esquadrão: '+P.squadStars[P.knightOrder]+'.');
+ }
+ function ctRenderStars(){
+  if(!P)return;ctStarsEnsure();
+  let card=document.getElementById('ct-squad-stars');
+  if(!card){card=document.createElement('div');card.className='card';card.id='ct-squad-stars';const career=document.getElementById('page-career');if(career)career.appendChild(card);}
+  const ordered=CT_SQUADS_FINAL.map(name=>({name,stars:P.squadStars[name]||0})).sort((a,b)=>b.stars-a.stars);
+  const own=P.knightOrder||'';const ownRank=own?ordered.findIndex(x=>x.name===own)+1:0;
+  const ownStars=own?(P.squadStars[own]||0):0;const contributions=own?Object.entries(P.squadContributions[own]||{}).sort((a,b)=>b[1]-a[1]):[];
+  card.innerHTML='<div class="split"><h2>Ranking dos esquadrões</h2><span class="badge gold">Estrelas reais do jogo</span></div><p class="small muted">As estrelas são conquistadas por missões, patrulhas e feitos relevantes. O ranking muda conforme os esquadrões contribuem.</p><div class="grid"><div class="notice"><b>'+(own?own:'Sem esquadrão')+'</b><div class="small">'+ownStars+' estrelas · '+(own?'posição #'+ownRank:'faça o exame dos Cavaleiros Mágicos')+'</div></div><div class="notice"><b>'+(P.personalStars||0)+'</b><div class="small">Estrelas pessoais contribuídas</div></div></div><div style="margin-top:12px">'+ordered.map((x,i)=>'<div class="squad-rank-row '+(x.name===own?'mine':'')+'"><b>#'+(i+1)+'</b><span>'+ctSafe(x.name)+(x.name===own?' <b>(seu esquadrão)</b>':'')+'</span><b>'+x.stars+' ★</b></div>').join('')+'</div><div class="separator"></div><h3>Maiores contribuidores de '+ctSafe(own||'seu esquadrão')+'</h3>'+(contributions.length?contributions.slice(0,6).map((x,i)=>'<div class="contrib-row"><span>'+(i+1)+'. '+ctSafe(x[0])+'</span><b>'+x[1]+' estrelas</b></div>').join(''):'<p class="small muted">Entre em um esquadrão e conquiste estrelas para começar o histórico de contribuições.</p>')+'<button class="primary" id="ct-squad-mission" style="width:100%;margin-top:12px" '+(!own||P.age<15?'disabled':'')+'>Realizar missão do esquadrão</button><p class="tiny">Missões custam energia e só podem ser realizadas uma vez por ano.</p>';
+  const mb=document.getElementById('ct-squad-mission');if(mb)mb.onclick=()=>{if(!P.knightOrder||P.age<15)return;if(P.squadMissionYear===P.year){notify('Missão já concluída','Volte no próximo ano','Você já realizou a missão deste ano.');return;}if(P.energy<15){notify('Energia insuficiente','Descanse primeiro','A missão exige pelo menos 15 de energia.');return;}P.squadMissionYear=P.year;P.energy=clamp(P.energy-15);const amount=rand(2,7)+(P.magicSkill>35?2:0)+(P.reputation>40?1:0);ctGiveStars(amount,'uma missão do esquadrão');};
+ }
+ function ctRenderFamilyLooks(){
+  const root=document.getElementById('family-list');if(!root||!P||!Array.isArray(P.familyMembers))return;
+  root.querySelectorAll('.family-person').forEach((el,i)=>{const f=P.familyMembers.filter(x=>x.alive)[i];if(!f)return;let look=f.appearance;if(!look){look={hair:pick(['cabelos escuros','cabelos castanhos','cabelos prateados','cabelos claros']),eyes:pick(['olhos verdes','olhos castanhos','olhos azuis','olhos cinzentos']),face:pick(['rosto oval','rosto marcado','rosto delicado'])};f.appearance=look;}const old=el.querySelector('.person-appearance');if(!old){const d=document.createElement('div');d.className='person-appearance appearance-line';d.textContent=look.face+' · '+look.hair+' · '+look.eyes;const name=el.querySelector('.person-name');if(name)name.insertAdjacentElement('afterend',d);}});
+ }
+ function ctYearEventModal(){
+  const pool=[
+   {title:'Patrulha na fronteira',desc:'Uma patrulha relata movimento suspeito perto de uma aldeia. Seu esquadrão pede uma decisão.',opts:[['Investigar pessoalmente',()=>{P.reputation=clamp(P.reputation+3);P.energy=clamp(P.energy-8);if(P.knightOrder)ctGiveStars(2,'uma patrulha na fronteira');else{P.lastEvent='Você investigou uma patrulha e ganhou reputação.';saveGame(false);}}],['Enviar reforços',()=>{P.money=Math.max(0,P.money-10);P.reputation=clamp(P.reputation+2);P.lastEvent='Você financiou reforços para proteger a aldeia.';}],['Esperar mais informações',()=>{P.happiness=clamp(P.happiness-1);P.lastEvent='Você aguardou novas informações antes de agir.';}]]},
+   {title:'Convite para treinamento',desc:'Um cavaleiro veterano oferece um treinamento raro, mas você terá de abrir mão de parte do descanso.',opts:[['Aceitar treinamento',()=>{P.energy=clamp(P.energy-10);P.strength=clamp(P.strength+2);P.magicSkill=clamp(P.magicSkill+(P.hasGrimoire?2:0));P.lastEvent='Você treinou com um cavaleiro veterano.';}],['Estudar a técnica primeiro',()=>{P.intelligence=clamp(P.intelligence+2);P.lastEvent='Você estudou a técnica antes de tentar executá-la.';}],['Recusar por enquanto',()=>{P.happiness=clamp(P.happiness+1);P.lastEvent='Você preferiu descansar e treinar em outro momento.';}]]},
+   {title:'Problema na família',desc:'Um familiar precisa de ajuda e você precisa decidir como usar seu tempo e seus recursos.',opts:[['Ajudar pessoalmente',()=>{P.happiness=clamp(P.happiness+4);if(P.familyMembers&&P.familyMembers.length){const f=P.familyMembers.find(x=>x.alive);if(f){f.bond=clamp(f.bond+8);f.health=clamp(f.health+3);}}P.lastEvent='Você dedicou tempo à família e fortaleceu os vínculos.';}],['Pagar ajuda',()=>{P.money=Math.max(0,P.money-15);P.happiness=clamp(P.happiness+1);P.lastEvent='Você pagou por ajuda para resolver o problema familiar.';}],['Adiar a decisão',()=>{P.happiness=clamp(P.happiness-4);P.lastEvent='O problema familiar continuou sem solução por enquanto.';}]]},
+   {title:'Pedido do Rei Mago',desc:'Chega um relatório de uma missão que pode afetar a reputação do seu esquadrão.',opts:[['Assumir a missão',()=>{P.reputation=clamp(P.reputation+4);P.energy=clamp(P.energy-12);if(P.knightOrder)ctGiveStars(3,'uma missão recomendada pelo Rei Mago');P.lastEvent='Você aceitou uma missão recomendada pelo Rei Mago.';}],['Planejar com o esquadrão',()=>{P.intelligence=clamp(P.intelligence+2);P.reputation=clamp(P.reputation+1);P.lastEvent='Você planejou a missão com seus companheiros.';}],['Recusar por falta de preparo',()=>{P.energy=clamp(P.energy+3);P.lastEvent='Você recusou a missão para se preparar melhor.';}]]}
+  ];
+  const ev=pick(pool);showChoiceModal('Ano '+(P.age+1),ev.title,ev.desc+' Escolha como responder. O tempo só avançará depois da sua decisão.',ev.opts.map(o=>[o[0],'Escolher esta opção','A decisão terá consequências.',()=>{closeModal();ctFinalYearLock=false;o[1]();if(typeof saveGame==='function')saveGame(false);setTimeout(()=>{if(typeof _ctBaseAdvanceFinal==='function')_ctBaseAdvanceFinal();},250);setTimeout(()=>{ctFinalYearLock=false;},4500);}]).concat([['Não decidir agora','Voltar','Fechar sem avançar o ano.',()=>{closeModal();ctFinalYearLock=false;} ]]));const closeBtn=document.getElementById('choiceclose');if(closeBtn)closeBtn.onclick=()=>{closeModal();ctFinalYearLock=false;};
+ }
+ const _ctBaseAdvanceFinal=advanceYear;
+ advanceYear=function(){if(!P||!P.alive||ctFinalYearLock||actionLock)return;ctFinalYearLock=true;ctYearEventModal();setTimeout(()=>{ctFinalYearLock=false;},30000);};
+ const _ctRenderFinal=render;
+ render=function(){_ctRenderFinal();if(P){ctAppearance();ctStarsEnsure();ctRenderStars();ctRenderFamilyLooks();}};
+ const _ctSaveFinal=saveGame;
+ saveGame=function(show=true){if(P){P.appearance=P.appearance||{};P.squadStars=P.squadStars||{};P.squadContributions=P.squadContributions||{};}return _ctSaveFinal(show);};
+ const _ctLoadFinal=loadSaved;
+ loadSaved=function(){const player=_ctLoadFinal();if(player){player.appearance=player.appearance||{};player.squadStars=player.squadStars||{};player.squadContributions=player.squadContributions||{};}return player;};
+ const _ctNewFinal=newPlayer;
+ newPlayer=function(...args){const player=_ctNewFinal(...args);player.appearance={skin:'morena clara',hair:pick(['cabelo preto ondulado','cabelo castanho curto','cabelo prateado']),eyes:pick(['olhos verdes','olhos castanhos','olhos cinzentos']),build:'porte ágil',face:'rosto oval'};player.squadStars={};player.squadContributions={};player.personalStars=0;return player;};
+ const _ctMagicFinal=renderMagic;
+ renderMagic=function(){if(P&&P.hasGrimoire){P.attacks=Array.isArray(P.attacks)?P.attacks:[];CT_EXTRA_SPELLS.forEach(sp=>{if(!P.attacks.some(a=>a.name===sp.name))P.attacks.push({...sp});});}return _ctMagicFinal();};
+ function ctRepairBottom(){
+  if(!P)return;
+  const nav=document.getElementById('bottomnav'),app=document.getElementById('app'),header=document.getElementById('header'),hud=document.getElementById('lifeHud');
+  if(nav)nav.classList.remove('hidden');if(app)app.classList.remove('hidden');if(header)header.classList.remove('hidden');if(hud)hud.style.display='block';
+  if(typeof refreshLifeHud==='function')refreshLifeHud();
+ }
+ const _ctStartFinal=startGame;
+ startGame=function(){_ctStartFinal();setTimeout(ctRepairBottom,60);};
+ const _ctRestartFinal=restartGame;
+ restartGame=function(){_ctRestartFinal();setTimeout(()=>{if(P)ctRepairBottom();},60);};
+ window.addEventListener('pageshow',()=>setTimeout(()=>{if(P)ctRepairBottom();},120));
+ window.addEventListener('focus',()=>{if(P)ctRepairBottom();});
+ document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&P){try{localStorage.setItem('clovertime-save-v3',JSON.stringify(P));}catch(e){}}else if(document.visibilityState==='visible'&&P){ctRepairBottom();if(typeof render==='function')render();}});
+ window.addEventListener('pagehide',()=>{if(P){try{localStorage.setItem('clovertime-save-v3',JSON.stringify(P));}catch(e){}}});
+ setTimeout(()=>{if(P){ctRepairBottom();render();}},500);
+})();
+</script>
+
+</body></html>
